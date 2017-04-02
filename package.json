@@ -1,6 +1,6 @@
 {
   "name": "wizardbot",
-  "version": "0.0.1",
+  "version": "0.8.0",
   "description": "event bot sadly",
   "main": "app.js",
   "scripts": {
