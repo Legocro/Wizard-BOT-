@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs");
 const token = require('./settings.json').token;
-const quiz = require('./quiz.js')
 const ddiff = require('return-deep-diff');
 client.on('ready', () => {
   console.log('I\'m Online\nAnd\nI need punishment.');
@@ -80,48 +79,51 @@ client.on('message', message => {
 
 ////////////VARS/////////////
 
-var fullname = [];
-var firstname = [];
-//fullname[0] = '';
+var charfname = args[0];
+var charfiname = args[0];
+var quizphoto = args[0];
 
 ////////////////////////////
 
 //////////////FUNCTION///////////////
-//function fullname() {
-//  fullname = message.content.split(" ").slice(1).join(" ")
-//}
+
+
+
 /////////////////////////////////////
 
-  if (message.content.startsWith(prefix + 'setfullname')) {
-    fullname = message.content.split(" ").slice(1).join(" ")
-    message.channel.sendMessage(`The full name for the quiz has sucessfully been changed ${message.author}`);
+  if (message.content.startsWith(prefix + 'qfname')) {
+    message.channel.sendMessage(`The full name for the quiz character has sucessfully been changed ${message.author}`);
+    let charfname = args[0];
   } else
 
-  if (message.content === prefix + 'setfirstname' + firstname)
+  if (message.content.startsWith(prefix + 'qfiname')) {
+    message.channel.sendMessage(`The first name for the quiz character has sucessfully been changed ${message.author}!`);
+    let charfiname = args[0];
+  } else
+
+  if (message.content.startsWith(prefix + 'setquiz')) {
+    message.channel.sendMessage(`${message.author}, the quiz event photo has been changed!`);
+    let quizphoto = args[0];
+  } else
+
+  if (message.content.startsWith(prefix + 'log')) {
+    console.log(quizphoto)
+  } else
 
   if (message.content.startsWith(prefix + 'event')) {
         if (message.member.roles.exists('name', 'Magician!')) {
-        client.channels.get('279299921071570958').sendMessage('**Hey everyone there\'s a __Quiz Event__ ongoing!**')
+        message.guild.defaultChannel.sendMessage('**Hey @everyone, there\'s a __Quiz Event__ ongoing!**')
       }
     } else
 
     if (message.content.startsWith(prefix + 'quiz')) {
       if (message.member.roles.exists('name', 'Magician!')) {
-        message.guild.defaultChannel.sendMessage('**Try to guess who this is!**')
-        message.guild.defaultChannel.sendFile('quizv1.png')
+        message.guild.defaultChannel.sendMessage('**Try to guess who this is!**' + quizphoto);
+        //message.guild.defaultChannel.sendFile(quizphoto);
       }
     } else
 
-//  if (message.content.startsWith(prefix + 'guess ' + guesslo1) && commandUsed != true) {
-//    message.channel.sendMessage(`You guessed it right ${message.author}!`);
-//    if (!points[message.author.id]) points[message.author.id] = {
-//      points : 0
-//    }
-//    points[message.author.id].points++;
-//    commandUsed = true;
-//  } else
-
-  if (message.content.startsWith(prefix + 'guess ' + fullname()) && commandUsed != true) {
+  if (message.content.startsWith(prefix + 'guess ' + charfname) && commandUsed != true) {
     message.channel.sendMessage(`You guessed it right ${message.author}!`);
     if (!points[message.author.id]) points[message.author.id] = {
       points : 0
@@ -130,16 +132,25 @@ var firstname = [];
     commandUsed = true;
   } else
 
-//  if (message.content.startsWith(prefix + 'guess ' + guesslo0) && commandUsed != true) {
-//    message.channel.sendMessage(`You guessed it right ${message.author}!`);
-//    if (!points[message.author.id]) points[message.author.id] = {
-//      points : 0
-//    }
-//    points[message.author.id].points++;
-//    commandUsed = true;
-//  } else
+  if (message.content.toLowerCase().startsWith(prefix + 'guess ' + charfname) && commandUsed != true) {
+    message.channel.sendMessage(`You guessed it right ${message.author}!`);
+    if (!points[message.author.id]) points[message.author.id] = {
+      points : 0
+    }
+    points[message.author.id].points++;
+    commandUsed = true;
+  } else
 
-  if (message.content.startsWith(prefix + 'guess ' + fullname[0]) && commandUsed != true) {
+  if (message.content.toLowerCase().startsWith(prefix + 'guess ' + charfiname) && commandUsed != true) {
+    message.channel.sendMessage(`You guessed it right ${message.author}!`);
+    if (!points[message.author.id]) points[message.author.id] = {
+      points : 0
+    }
+    points[message.author.id].points++;
+    commandUsed = true;
+  } else
+
+  if (message.content.startsWith(prefix + 'guess ' + charfiname) && commandUsed != true) {
     message.channel.sendMessage(`You guessed it right ${message.author}!`);
     if (!points[message.author.id]) points[message.author.id] = {
       points : 0
@@ -153,6 +164,17 @@ var firstname = [];
     return
   } else
 
+  if (message.content.startsWith(prefix + 'restart')) {
+    commandUsed = false;
+    message.guild.defaultChannel.sendMessage(`**The Quiz has been restarted by ${message.author}!**`)
+  } else
+
+  if (message.content.startsWith(prefix + 'modhelp')) {
+    if (message.member.roles.exists('name', 'Magician!')) {
+      message.channel.sendMessage(`**Hey \'lil ${message.author}...**\n\n**This is what you can do:**\n\`w!restart\`, \`w!setquiz\`, \`w!qfiname\`, \`w!qfname\`, \`w!quiz\` and \`w!event\``);
+    }
+  } else
+
   if (message.content.startsWith(prefix + "points")) {
     message.channel.sendMessage(`**You have currently \`${userData.points}\` point(s) ${message.author}!**`);
   }
@@ -160,6 +182,5 @@ var firstname = [];
     if (err) console.error(err)
   })
 });
-
 
 client.login(token);
