@@ -9,6 +9,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs");
+const jsonfile = require('jsonfile');
 const token = require('./settings.json').token;
 const ddiff = require('return-deep-diff');
 ////////////////////////////////////
@@ -21,6 +22,7 @@ client.on('ready', () => {
 //--------------------------------//
 //////////////BLOCKS////////////////
 let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
+let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
 ////////////////////////////////////
 //--------------------------------//
 //////////GUILD EVENTS//////////////
@@ -39,10 +41,11 @@ client.on('message', message => {
 ////////////////////////////////////
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
-  var firstname = args[0];
+//  let firstname = args[0];
   var lastname = args[0];
   var pphoto = args[0];
-  var userData = points[message.author.id];
+  let userData = points[message.author.id];
+  let firstname = names[message.guild.id];
 
 //////////EVERYONE CAN DO //////////
   if (message.content.includes('pregnant')) {
@@ -53,10 +56,9 @@ client.on('message', message => {
     message.channel.sendMessage('Eating insects...').then(msg => {
       msg.edit(`I took \`${msg.createdTimestamp - message.createdTimestamp} ms\` to eat all of them! ${message.guild.emojis}`)
     });
-  };
+  } else
 
-  switch (userMod) {
-    case true:
+  while (userMod) {
     if (message.content.startsWith(prefix + 'help')) {
       message.channel.sendMessage(`Konichiwa ${message.author}\n\nThese are the mod commands:\n\`w!restart\`, \`w!squiz\`, \`w!sfname\`, \`w!slname\`, \`w!quiz\`, \`w!event\`, \`w!ss\` and \`w!ss\`\n\nAnd these are the pleb ones:\n\`w!ping\`, \`w!guess <character name>\` and \`w!point1s\``);
     } else if (message.content.startsWith(prefix + 'sg')) {
@@ -65,29 +67,36 @@ client.on('message', message => {
     } else if (message.content.startsWith(prefix + 'ss')) {
       if(!argresult) argresult = 'online';
       client.user.setStatus(argresult);
+    } else if (message.content.startsWith(prefix + 'sfname')) {
+      message.channel.sendMessage(`Who dis new phone ${message.author}`);
+      if (!names[message.guild.id]) names[message.guild.id] = {
+        firstName: args[0]
+      }
+      names[message.guild.id].firstName = args[0];
     };
     break;
-    case false:
+  };
+
+  while (!userMod) {
     if (message.content.startsWith(prefix + 'help')) {
       message.channel.sendMessage(`Hello ${message.author}\n\nThese are the commands you can use:\n\`w!ping\`, \`w!guess <character name>\`, \`w!point1s\``);
     }
     break;
   };
 
-
-  if(message.content.startsWith(prefix + 'sfname')) {
-    message.channel.sendMessage(`Who dis new phone ${message.author}`);
-    firstname = args[0];
-  } else if (message.content.startsWith(prefix + 'guess' + firstname) && commandUsed != true) {
-    message.channel.sendMessage(`You guessed it right ${message.author}!`);
-    if (!points[message.author.id]) points[message.author.id] = {
-      points : 0
+  while (!commandUsed) {
+    if (message.content.startsWith(prefix + 'guess ' + firstname)) {
+      message.channel.sendMessage(`You guessed it right ${message.author}!`);
     }
-    points[message.author.id].points++;
-    commandUsed = true;
-  };
+    break;
+  }
+
+  fs.writeFile('./names.json', JSON.stringify(names), (err) => {
+    if (err) console.error(err)
+  });
 ////////////////////////////////////
 });
+console.log(JSON.parse(fs.readFileSync('./points.json')));
 ////////////////////////////////////
 //--------------------------------//
 ///////////////BOT C////////////////
