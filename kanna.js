@@ -109,6 +109,19 @@ client.on('message', message => {
     break;
   };
 
+  switch (commandUsed) {
+    case true:
+    if (message.content.startsWith(prefix + 'guess')) {
+      (message.channel.sendMessage(`The event has ended ${message.author} ${message.guild.emojis.find('name', 'thonk')}`));
+    }
+    break;
+    default:
+    if (message.content.startsWith(prefix + 'guess')) {
+      (message.channel.sendMessage(`You guessed it wrong ${message.author}!`));
+    }
+    break;
+  };
+
   while (!commandUsed) {
     if (message.content.startsWith(prefix + 'guess ' + firstname)) {
       message.channel.sendMessage(`You guessed it right ${message.author}!`);
@@ -142,21 +155,10 @@ client.on('message', message => {
     break;
   };
 
-  switch (commandUsed) {
-    case true:
-    if (message.content.startsWith(prefix + 'guess')) {
-      (message.channel.sendMessage(`The event has ended ${message.author} ${message.guild.emojis.find('name', 'thonk')}`));
-    }
-    break;
-    default:
-    if (message.content.startsWith(prefix + 'guess')) {
-      (message.channel.sendMessage(`You guessed it wrong ${message.author}!`));
-    }
-    break;
-  };
-
   if (points[message.author.id] === 5) {
-    points[message.author.id] - 5
+    points[message.author.id] = {
+      points: -5
+    }
   };
 
   if (message.content.startsWith(prefix + "points")) {
@@ -176,5 +178,5 @@ client.on('message', message => {
 ////////////////////////////////////
 //--------------------------------//
 ///////////////BOT C////////////////
-client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C8BGrA.T7FubaUfq9nzChUbueLDXOyO_w8");
+client.login("Mjk5Mjg0NzQwMTI3NTg4MzUz.C8bqJw.WT90RSVTAXwMAABU-FWAJoCabYI");
 ////////////////////////////////////

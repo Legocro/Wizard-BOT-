@@ -14,5 +14,8 @@
     "opusscript": "0.0.3",
     "return-deep-diff": "^0.2.7",
     "uws": "^0.14.1"
+  },
+  "engines": {
+    "node": "v7.7.4"
   }
 }
