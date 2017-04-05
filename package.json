@@ -1,8 +1,8 @@
 {
   "name": "wizardbot",
-  "version": "0.8.0",
+  "version": "2.3.0",
   "description": "event bot sadly",
-  "main": "app.js",
+  "main": "kanna.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.0.0",
+    "jsonfile": "^2.4.0",
     "opusscript": "0.0.3",
     "return-deep-diff": "^0.2.7",
     "uws": "^0.14.1"
