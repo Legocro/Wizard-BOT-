@@ -29,9 +29,9 @@ client.on('channelPinsUpdate', (channel, time) => {
 client.on('guildCreate', guild => {
   guild.defaultChannel.sendMessage(`**Thanks for adding me here! I hope __${guild.name}__ have loads of insects!\n\nDo \`k!about\` to know a bit about me!\n\nAlso you can see all commands with \`k!help\`!\n\nJoin my support server if you have any questions!\nhttps://discord.gg/uBdXdE9\n\nOh and add my emoji to your server! \`https://cdn.discordapp.com/emojis/282721376320618497.png\` so i can show myself!**`)
   .then(names[guild.id] = {
-    firstName: "Dio",
-    lastName: "Brando",
-    quizPhoto: "http://vignette3.wikia.nocookie.net/jjba/images/8/87/DioP2.png/revision/latest?cb=20161028235952",
+    firstName: "Kanna",
+    lastName: "Kobayashi",
+    quizPhoto: "http://pm1.narvii.com/6366/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg",
   })
   fs.writeFile('./names.json', JSON.stringify(names), (err) => {
     if (err) console.error(err)
