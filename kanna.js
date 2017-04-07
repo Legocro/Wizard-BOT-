@@ -55,7 +55,16 @@ client.on('message', message => {
   let firstname = names[message.guild.id].firstName;
   let lastname = names[message.guild.id].lastName;
   let qphoto = names[message.guild.id].quizPhoto;
-
+  const embed = new Discord.RichEmbed()
+  embed.setAuthor(`${message.author.username} started this event`, `${message.author.avatarURL}`)
+  embed.setColor('#F7C3EF')
+  embed.setFooter('This event has started at', 'https://cdn.discordapp.com/avatars/297459926505095180/36d9952998c1a24e3646af1a3e77cda6.jpg?size=1024')
+  embed.setImage(qphoto)
+  embed.setThumbnail(`${message.guild.iconURL}`)
+  embed.setTimestamp()
+  embed.setURL('https://discord.js.org/#/docs/main/indev/class/RichEmbed')
+  embed.addField('Try to guess who this is!',
+  'This event will be over in 15 minutes')
 //////////EVERYONE CAN DO //////////
   if (message.content.includes('pregnant')) {
     message.channel.sendMessage(`Fear FBI ${message.author}\nhttps://cdn.discordapp.com/attachments/279299921071570958/298142045938122753/memo.png`);
@@ -110,9 +119,9 @@ client.on('message', message => {
     } else if (message.content.startsWith(prefix + 'event')) {
       message.guild.defaultChannel.sendMessage("People around @here! There\'s an quiz event coming!");
     } else if (message.content.startsWith(prefix + 'qstart')) {
-      message.channel.sendMessage(`The quiz event has been started by ${message.author}!\nIn 15 minutes the event will be ended!\n\n**Try to guess who this is:**\n` + qphoto)
+      message.channel.sendEmbed(embed)
       .then(() => {
-        message.channel.awaitMessages(response => response.content === firstname || response.content === lastname || response.content === lastname.toLowerCase() || response.content === firstname.toLowerCase() || response.content === firstname + ' ' +  lastname || response.content === firstname.toLowerCase() + ' ' +  lastname.toLowerCase(), {
+        message.channel.awaitMessages(response => response.content.startsWith(firstname) || response.content === lastname || response.content === lastname.toLowerCase() || response.content.startsWith(firstname.toLowerCase()) || response.content === firstname + ' ' +  lastname || response.content === firstname.toLowerCase() + ' ' + lastname.toLowerCase(), {
           max: 1,
           time: 900000,
           errors: ['time'],
@@ -122,8 +131,9 @@ client.on('message', message => {
         })
         .catch(() => {
           message.channel.sendMessage('**No one guessed it right! So the event has ended!**');
-        });
-      });
+        })
+      })
+      .catch(console.error)
     };
       break;
     };
