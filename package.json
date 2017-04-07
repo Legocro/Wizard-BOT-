@@ -1,7 +1,7 @@
 {
-  "name": "wizardbot",
+  "name": "kannakobayashi",
   "version": "5.2.0",
-  "description": "event bot sadly",
+  "description": "cutest dragon you will ever see.",
   "main": "kanna.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
