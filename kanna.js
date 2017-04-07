@@ -28,15 +28,18 @@ client.on('channelPinsUpdate', (channel, time) => {
 });
 client.on('guildCreate', guild => {
   guild.defaultChannel.sendMessage(`**Thanks for adding me here! I hope __${guild.name}__ have loads of insects!\n\nDo \`k!about\` to know a bit about me!\n\nAlso you can see all commands with \`k!help\`!\n\nJoin my support server if you have any questions!\nhttps://discord.gg/uBdXdE9\n\nOh and add my emoji to your server! \`https://cdn.discordapp.com/emojis/282721376320618497.png\` so i can show myself!**`)
-  .then(names[guild.id] = {
+  console.log(`I have joined ${guild.name}, it\'s ID is ${guild.id}!`)
+  })
+
+client.on('ready', () => {
+  client.guilds.map(g => names[g.id] = {
     firstName: "Kanna",
     lastName: "Kobayashi",
     quizPhoto: "http://pm1.narvii.com/6366/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg",
-  })
+  });
   fs.writeFile('./names.json', JSON.stringify(names), (err) => {
     if (err) console.error(err)
   });
-  console.log(`I have joined ${guild.name}, it\'s ID is ${guild.id}!`)
 });
 ////////////////////////////////////
 //--------------------------------//
@@ -96,16 +99,16 @@ client.on('message', message => {
     if (message.content.startsWith(prefix + 'help')) {
       message.channel.sendMessage(`Konichiwa ${message.author}\n\nThese are the mod commands:\n\`k!sqphoto\`, \`k!sfname\`, \`k!slname\`, \`k!qstart\` and \`k!event\`\n\nAnd these are the pleb ones:\n\`k!ping\`, \`k!invite\` and \`k!about\``);
     } else if (message.content.startsWith(prefix + 'sfname')) {
-      message.channel.sendMessage(`The first name has changed sucessfully ${message.author}`);
+      message.channel.sendMessage(`The first name has changed sucessfully ${message.author}`)
       names[message.guild.id].firstName = args[0];
     } else if (message.content.startsWith(prefix + 'slname')) {
-      (message.channel.sendMessage(`The last name has changed sucessfully ${message.author}`));
+      message.channel.sendMessage(`The last name has changed sucessfully ${message.author}`);
       names[message.guild.id].lastName = args[0];
     } else if (message.content.startsWith(prefix + 'sqphoto')) {
-      (message.channel.sendMessage(`The quiz photo has changed sucessfully ${message.author}`));
+      message.channel.sendMessage(`The quiz photo has changed sucessfully ${message.author}`);
       names[message.guild.id].quizPhoto = args[0];
     } else if (message.content.startsWith(prefix + 'event')) {
-      (message.guild.defaultChannel.sendMessage("People around @here! There\'s an quiz event coming!"));
+      message.guild.defaultChannel.sendMessage("People around @here! There\'s an quiz event coming!");
     } else if (message.content.startsWith(prefix + 'qstart')) {
       message.channel.sendMessage(`The quiz event has been started by ${message.author}!\nIn 15 minutes the event will be ended!\n\n**Try to guess who this is:**\n` + qphoto)
       .then(() => {
