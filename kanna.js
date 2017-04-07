@@ -28,11 +28,11 @@ client.on('channelPinsUpdate', (channel, time) => {
 });
 client.on('guildCreate', guild => {
   guild.defaultChannel.sendMessage(`**Thanks for adding me here! I hope __${guild.name}__ have loads of insects!\n\nDo \`k!about\` to know a bit about me!\n\nYou can do mod commands by doing a role called "Magician!" and assigning to yourself.\n\nAlso you can see all commands with \`k!help\`!\n\nJoin my support server if you have any questions!\nhttps://discord.gg/uBdXdE9\n\nOh and add my emoji to your server! \`https://cdn.discordapp.com/emojis/282721376320618497.png\` so i can show myself!**`);
-  names[guild.id] = {
+  .then((names[guild.id]) => {
     firstName: "Dio",
     lastName: "Brando",
     quizPhoto: "http://vignette3.wikia.nocookie.net/jjba/images/8/87/DioP2.png/revision/latest?cb=20161028235952",
-  }
+  })
   console.log(`I have joined ${guild.name}, it\'s ID is ${guild.id}!`)
 });
 ////////////////////////////////////
@@ -46,9 +46,9 @@ client.on('message', message => {
 ////////////////////////////////////
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
-  let firstname = names[message.guild.id].firstName;
-  let lastname = names[message.guild.id].lastName;
-  let qphoto = names[message.guild.id].quizPhoto;
+  var firstname = names[message.guild.id].firstName;
+  var lastname = names[message.guild.id].lastName;
+  var qphoto = names[message.guild.id].quizPhoto;
 
 //////////EVERYONE CAN DO //////////
   if (message.content.includes('pregnant')) {
