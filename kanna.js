@@ -62,7 +62,6 @@ client.on('message', message => {
   embed.setImage(qphoto)
   embed.setThumbnail(`${message.guild.iconURL}`)
   embed.setTimestamp()
-  embed.setURL('https://discord.js.org/#/docs/main/indev/class/RichEmbed')
   embed.addField('Try to guess who this is!',
   'This event will be over in 15 minutes')
 //////////EVERYONE CAN DO //////////
