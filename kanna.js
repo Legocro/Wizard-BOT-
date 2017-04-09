@@ -14,7 +14,7 @@ const ddiff = require('return-deep-diff');
 //--------------------------------//
 ///////////CONSOLE LOGS/////////////
 client.on('ready', () => {
-  console.log("I want some insects!");
+  console.log("Give me insects... Or i\'ll not start v6.0.0");
 });
 ////////////////////////////////////
 //--------------------------------//
@@ -164,7 +164,7 @@ client.on('message', message => {
       message.channel.sendMessage(`The quiz photo has changed sucessfully ${message.author}`);
       names[message.guild.id].quizPhoto = args[0];
     } else if (message.content.startsWith(prefix + 'event')) {
-      message.guild.defaultChannel.sendMessage("People around @here! There\'s an quiz event coming!");
+      message.guild.defaultChannel.sendMessage("**People around @here! There is a quiz event coming!");
     } else if (message.content.startsWith(prefix + 'qstart')) {
       message.channel.sendEmbed(embed)
       .then(() => {
