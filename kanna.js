@@ -68,7 +68,7 @@ client.on('message', message => {
   embed.addField('Try to guess who this is!',
   'This event will be over in 15 minutes')
   const helpEmbed = new Discord.RichEmbed()
-  helpEmbed.setAuthor(`I have sent you a DM ${message.author.username}`, `${message.author.avatarURL}`)
+  helpEmbed.setAuthor(`DM incoming!`, `${message.author.avatarURL}`)
   helpEmbed.setColor('#FB3A9B')
   helpEmbed.setDescription(`Have fun ${message.author}!`)
   helpEmbed.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg')
