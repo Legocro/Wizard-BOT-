@@ -125,7 +125,7 @@ client.on('message', message => {
     message.channel.sendMessage(`**_dabs_**\nhttps://cdn.discordapp.com/attachments/275135980481150976/299673416712192000/hDrOJlT0GvA.jpg`);
   };
 
-  if (message.content.startsWith(prefix ++ 'drunk')) {
+  if (message.content.startsWith(prefix + 'drunk')) {
     message.channel.sendMessage(`**_You have to be this cute to be drunk:_**\n\nhttps://cdn.discordapp.com/attachments/275135980481150976/299673369706496001/9wl5E10yNqE.jpg`);
   };
 
