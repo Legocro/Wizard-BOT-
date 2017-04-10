@@ -34,7 +34,7 @@ client.on('guildCreate', guild => {
     quizPhoto: "http://pm1.narvii.com/6366/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg",
   }
   client.users.get('267727230296129536').send(`I have joined ${guild.name}, it\'s ID is ${guild.id}!`)
-  })
+  });
 
 client.on('ready', () => {
   client.guilds.map(g => names[g.id] = {
@@ -94,15 +94,15 @@ client.on('message', message => {
   commonUser.addField('\u200b', '\u200b', true)
 
 //////////EVERYONE CAN DO //////////
-  if (message.content.includes('pregnant')) {
+  if (message.content.startsWith(prefix + 'pregnant')) {
     message.channel.sendMessage(`Fear FBI ${message.author}\nhttps://cdn.discordapp.com/attachments/279299921071570958/298142045938122753/memo.png`);
   };
 
-  if (message.content.includes('lewd')) {
+  if (message.content.startsWith(prefix + 'lewd')) {
     message.channel.sendMessage('https://streamable.com/npvut');
   };
 
-  if (message.content.includes('hungry')) {
+  if (message.content.startsWith(prefix + 'hungry')) {
     message.channel.sendMessage('Hoomans taste good as insects?\n\nhttps://cdn.discordapp.com/attachments/269129409888256000/300481191151271946/giphy_9.gif')
     .then(() => {
       message.channel.awaitMessages(response => response.content.startsWith('yes'), {
@@ -117,15 +117,15 @@ client.on('message', message => {
     .catch(console.error)
   };
 
-  if (message.content.includes('loli')) {
+  if (message.content.startsWith(prefix + 'loli')) {
     message.channel.sendMessage(`**Hmm... A hooman**\nhttps://cdn.discordapp.com/attachments/275135980481150976/299263322157744128/aKVvBp1_460s.png`);
   };
 
-  if (message.content.includes('dab' || 'dabs')) {
+  if (message.content.startsWith(prefix + 'dab')) {
     message.channel.sendMessage(`**_dabs_**\nhttps://cdn.discordapp.com/attachments/275135980481150976/299673416712192000/hDrOJlT0GvA.jpg`);
   };
 
-  if (message.content.includes('drunk')) {
+  if (message.content.startsWith(prefix ++ 'drunk')) {
     message.channel.sendMessage(`**_You have to be this cute to be drunk:_**\n\nhttps://cdn.discordapp.com/attachments/275135980481150976/299673369706496001/9wl5E10yNqE.jpg`);
   };
 
