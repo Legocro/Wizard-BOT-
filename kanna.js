@@ -205,5 +205,5 @@ client.on('message', message => {
 ////////////////////////////////////
 //--------------------------------//
 ///////////////BOT C////////////////
-client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C8l-Uw.tjttjQQ_e4YRc0Dq5il48MbKnqg");
+client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C878jQ.hpOT-Bat3l5fS7nzxKPtAomRhvc");
 ////////////////////////////////////
