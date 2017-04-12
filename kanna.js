@@ -10,6 +10,7 @@ const client = new Discord.Client();
 const fs = require("fs");
 const jsonfile = require('jsonfile');
 const ddiff = require('return-deep-diff');
+const superagent = require("superagent");
 ////////////////////////////////////
 //--------------------------------//
 ///////////CONSOLE LOGS/////////////
@@ -30,25 +31,30 @@ client.on('guildCreate', guild => {
     lastName: "Kobayashi",
     quizPhoto: "http://pm1.narvii.com/6366/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg",
   }
-  client.users.get('267727230296129536').send(`**I have joined ${guild.name}**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}`)
+  client.users.get('267727230296129536').send(`**I have joined ${guild.name}**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}\n\n**Kanna is now on \`${client.guilds.size}\` guilds`)
   client.user.setGame(`k!help | on ${client.guilds.size} guilds`)
   });
 
   client.on('guildDelete', guild => {
-    client.users.get('267727230296129536').send(`**I have left ${guild.name}**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}`)
+    client.users.get('267727230296129536').send(`**I have left ${guild.name}**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}\n\n**Kanna is now on \`${client.guilds.size}\` guilds`)
     client.user.setGame(`k!help | on ${client.guilds.size} guilds`)
     });
 
   client.on('ready', () => {
+    superagent
+        .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
+        .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
+        .set("Accept", "application/json")
+        .send({ server_count: client.guilds.size })
+        .catch((err) => {
+            console.log(err);
+        });
     setInterval(() => {
     superagent
         .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
         .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
         .set("Accept", "application/json")
         .send({ server_count: client.guilds.size })
-        .then((res) => {
-            console.log(`Posted Guild Count to Discord Bots, new count is ${res.body.stats[0].server_count}.`);
-        })
         .catch((err) => {
             console.log(err);
         });
