@@ -108,7 +108,7 @@ client.on('message', message => {
   tamerUser.setURL('https://discord.gg/uBdXdE9')
   tamerUser.addField('Tamer Commands',
     '\`k!sqphoto <link>\` sets the character photo\n\`k!sfname\` sets the character first name\n\`k!slname\` sets the character last name\n\`k!qstart\` starts the event\n\`k!event\` announces the event with an @here in the default channel')
-  tamerUser.addField('User Commands', '\`k!ping\` see how long the bot takes to answer commands\n\`k!invite\` gets the bot link invite\n\`k!about\` a bit about **Kanna Kobayashi** and how to set it up\n\`k!feedback\` sends a feedback to the overlord\n\`k!bstats\` see the bot current stats\n\`k!sstats\` see the guild stats', true)
+  tamerUser.addField('User Commands', '\`k!ping\` see how long the bot takes to answer commands\n\`k!invite\` gets the bot link invite\n\`k!about\` a bit about **Kanna Kobayashi** and how to set it up\n\`k!feedback\` sends a feedback to the overlord\n\`k!bstats\` see the bot current stats\n\`k!gstats\` see the guild stats', true)
   tamerUser.addField('Memes', '\`k!pregnant\`\n\`k!lewd\`\n\`k!hungry\`\n\`k!loli\`\n\`k!dab\`\n\`k!drunk\`\n\`k!triggered\`\n\`k!endme\`\n\`k!shs\`\`k!russia\`\n\`k!gangsta\`\n\`k!comfy\`', true)
 
 
@@ -120,7 +120,7 @@ client.on('message', message => {
   commonUser.setFooter('BOT done by Wizardλ#4559', 'https://cdn.discordapp.com/avatars/267727230296129536/d97af37c3284d8c18a7c314c7c3f7174.jpg?size=1024');
   commonUser.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg');
   commonUser.setURL('https://discord.gg/uBdXdE9')
-  commonUser.addField('Commands', '\`k!ping\` see how long the bot takes to answer commands\n\`k!invite\` gets the bot link invite\n\`k!about\` a bit about **Kanna Kobayashi** and how to set it up\n\`k!feedback\` sends a feedback to the overlord\n\`k!bstats\` see the bot current stats\n\`k!sstats\` see the guild stats', true)
+  commonUser.addField('Commands', '\`k!ping\` see how long the bot takes to answer commands\n\`k!invite\` gets the bot link invite\n\`k!about\` a bit about **Kanna Kobayashi** and how to set it up\n\`k!feedback\` sends a feedback to the overlord\n\`k!bstats\` see the bot current stats\n\`k!gstats\` see the guild stats', true)
   commonUser.addField('Memes', '\`k!pregnant\`\n\`k!lewd\`\n\`k!hungry\`\n\`k!loli\`\n\`k!dab\`\n\`k!drunk\`\n\`k!triggered\`\n\`k!endme\`\n\`k!shs\`\`k!russia\`\n\`k!gangsta\`\n\`k!comfy\`', true)
 
   const stats = new Discord.RichEmbed()
@@ -241,7 +241,7 @@ client.on('message', message => {
     message.channel.sendMessage(`A feedback has been sent to the overlord!`)
   } else if (message.content.startsWith(prefix + 'bstats')) {
     message.channel.sendEmbed(stats)
-  } else if (message.content.startsWith(prefix + 'sstats')) {
+  } else if (message.content.startsWith(prefix + 'gstats')) {
     message.channel.sendEmbed(serverstatus)
   } else
 
