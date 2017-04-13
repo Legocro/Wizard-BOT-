@@ -10,7 +10,6 @@ const client = new Discord.Client();
 const fs = require("fs");
 const jsonfile = require('jsonfile');
 const ddiff = require('return-deep-diff');
-const superagent = require("superagent");
 ////////////////////////////////////
 //--------------------------------//
 ///////////CONSOLE LOGS/////////////
@@ -24,6 +23,7 @@ let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
 ////////////////////////////////////
 //--------------------------------//
 //////////GUILD EVENTS//////////////
+
 client.on('guildCreate', guild => {
   guild.defaultChannel.sendMessage(`**Thanks for adding me here! I hope __${guild.name}__ have loads of insects!\n\nDo \`k!about\` to know a bit about me!\n\nAlso you can see all commands with \`k!help\`!\n\nJoin my support server if you have any questions!\nhttps://discord.gg/uBdXdE9**`)
   names[guild.id] = {
@@ -31,35 +31,36 @@ client.on('guildCreate', guild => {
     lastName: "Kobayashi",
     quizPhoto: "http://pm1.narvii.com/6366/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg",
   }
-  client.users.get('267727230296129536').send(`**I have joined ${guild.name}**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}\n\n**Kanna is now on \`${client.guilds.size}\` guilds**`)
-  client.user.setGame(`k!help | on ${client.guilds.size} guilds`)
+  client.users.get('267727230296129536').send(`**I have joined __${guild.name}__**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner.user.username}#${guild.owner.user.discriminator}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}\n\n**Guild Photo**\n${guild.iconURL}`)
+  client.user.setGame(`k!help | on ${client.guilds.size} guilds`);
+  superagent
+      .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
+      .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
+      .set("Accept", "application/json")
+      .send({ server_count: client.guilds.size })
+      .then((res) => {
+          console.log(`Posted Guild Count to Discord Bots, new count is ${res.body.stats[0].server_count}.`);
+      })
+      .catch((err) => {
+          console.log(err);
+      });
   });
 
   client.on('guildDelete', guild => {
-    client.users.get('267727230296129536').send(`**I have left ${guild.name}**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}\n\n**Kanna is now on \`${client.guilds.size}\` guilds**`)
-    client.user.setGame(`k!help | on ${client.guilds.size} guilds`)
+    client.users.get('267727230296129536').send(`**I have left __${guild.name}__**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner.user.username}#${guild.owner.user.discriminator}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}\n\n**Guild Photo**\n${guild.iconURL}`)
+    client.user.setGame(`k!help | on ${client.guilds.size} guilds`);
+    superagent
+        .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
+        .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
+        .set("Accept", "application/json")
+        .send({ server_count: client.guilds.size })
+        .then((res) => {
+            console.log(`Posted Guild Count to Discord Bots, new count is ${res.body.stats[0].server_count}.`);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
     });
-
-  client.on('ready', () => {
-    superagent
-        .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-        .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
-        .set("Accept", "application/json")
-        .send({ server_count: client.guilds.size })
-        .catch((err) => {
-            console.log(err);
-        });
-    setInterval(() => {
-    superagent
-        .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-        .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
-        .set("Accept", "application/json")
-        .send({ server_count: client.guilds.size })
-        .catch((err) => {
-            console.log(err);
-        });
-}, 900000);
-  })
 
 client.on('ready', () => {
   client.guilds.map(g => names[g.id] = {
@@ -96,7 +97,6 @@ client.on('message', message => {
   embed.addField('Try to guess who this is!',
   'This event will be over in 15 minutes')
 
-
   const helpEmbed = new Discord.RichEmbed()
   helpEmbed.setAuthor(`DM incoming!`, `${message.author.displayAvatarURL}`)
   helpEmbed.setColor('#FB3A9B')
@@ -114,9 +114,8 @@ client.on('message', message => {
   tamerUser.setURL('https://discord.gg/uBdXdE9')
   tamerUser.addField('Tamer Commands',
     '\`k!sqphoto <link>\` sets the character photo\n\`k!sfname\` sets the character first name\n\`k!slname\` sets the character last name\n\`k!qstart\` starts the event\n\`k!event\` announces the event with an @here in the default channel')
-  tamerUser.addField('User Commands', '\`k!ping\` see how long the bot takes to answer commands\n\`k!invite\` gets the bot link invite\n\`k!about\` a bit about **Kanna Kobayashi** and how to set it up\n\`k!feedback\` sends a feedback to the overlord\n\`k!bstats\` see the bot current stats\n\`k!gstats\` see the guild stats', true)
-  tamerUser.addField('Memes', '\`k!pregnant\`\n\`k!lewd\`\n\`k!hungry\`\n\`k!loli\`\n\`k!dab\`\n\`k!drunk\`\n\`k!triggered\`\n\`k!endme\`\n\`k!shs\`\n\`k!russia\`\n\`k!gangsta\`\n\`k!comfy\`', true)
-
+  tamerUser.addField('User Commands', '\`k!ping\` see how long the bot takes to answer commands\n\`k!invite\` gets the bot link invite\n\`k!about\` a bit about **Kanna Kobayashi** and how to set it up\n\`k!feedback\` sends a feedback to the overlord\n\`k!bstats\` see the bot current stats\n\`k!sstats\` see the guild stats', true)
+  tamerUser.addField('Memes', '\`k!pregnant\`\n\`k!lewd\`\n\`k!hungry\`\n\`k!loli\`\n\`k!dab\`\n\`k!drunk\`\n\`k!triggered\`\n\`k!endme\`\n\`k!shs\`\`k!russia\`\n\`k!gangsta\`\n\`k!comfy\`\n\`k!police\`\n\`k!doit\`', true)
 
   const commonUser = new Discord.RichEmbed()
   commonUser.setTitle(`**アホイ\(Ahoi\) ${message.author.username}**`)
@@ -126,15 +125,40 @@ client.on('message', message => {
   commonUser.setFooter('BOT done by Wizardλ#4559', 'https://cdn.discordapp.com/avatars/267727230296129536/d97af37c3284d8c18a7c314c7c3f7174.jpg?size=1024');
   commonUser.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg');
   commonUser.setURL('https://discord.gg/uBdXdE9')
-  commonUser.addField('Commands', '\`k!ping\` see how long the bot takes to answer commands\n\`k!invite\` gets the bot link invite\n\`k!about\` a bit about **Kanna Kobayashi** and how to set it up\n\`k!feedback\` sends a feedback to the overlord\n\`k!bstats\` see the bot current stats\n\`k!gstats\` see the guild stats', true)
-  commonUser.addField('Memes', '\`k!pregnant\`\n\`k!lewd\`\n\`k!hungry\`\n\`k!loli\`\n\`k!dab\`\n\`k!drunk\`\n\`k!triggered\`\n\`k!endme\`\n\`k!shs\`\n\`k!russia\`\n\`k!gangsta\`\n\`k!comfy\`', true)
+  commonUser.addField('Commands', '\`k!ping\` see how long the bot takes to answer commands\n\`k!invite\` gets the bot link invite\n\`k!about\` a bit about **Kanna Kobayashi** and how to set it up\n\`k!feedback\` sends a feedback to the overlord\n\`k!bstats\` see the bot current stats\n\`k!sstats\` see the guild stats', true)
+  commonUser.addField('Memes', '\`k!pregnant\`\n\`k!lewd\`\n\`k!hungry\`\n\`k!loli\`\n\`k!dab\`\n\`k!drunk\`\n\`k!triggered\`\n\`k!endme\`\n\`k!shs\`\`k!russia\`\n\`k!gangsta\`\n\`k!comfy\`\n\`k!police\`\n\`k!doit\`', true)
+//////////////////////
+
+  let minutes;
+  let hours;
+  let seconds;
+
+  if((client.uptime / 60000 % 60).toFixed() == 0) {
+    minutes = '';
+  } else if((client.uptime / 60000 % 60).toFixed() > 0) {
+    minutes = `\n` + (client.uptime / 60000 % 60).toFixed() + ' minute(s)'
+  };
+
+  if((client.uptime / 3600000 % 24).toFixed() == 0) {
+    hours = '';
+  } else if((client.uptime / 3600000 % 24).toFixed() > 0) {
+    hours = `\n` + (client.uptime / 3600000 % 24).toFixed() + ' hour(s)'
+  };
+
+  if ((client.uptime / 1000 % 60).toFixed() == 0) {
+    seconds = '';
+  } else if ((client.uptime / 1000 % 60).toFixed()) {
+    seconds = `\n` + (client.uptime / 1000 % 60).toFixed() + ' second(s)'
+  };
 
   const stats = new Discord.RichEmbed()
   stats.setAuthor('Stats for Kanna Kobayashi', 'https://cdn.discordapp.com/avatars/297459926505095180/36d9952998c1a24e3646af1a3e77cda6.jpg?size=1024');
-  stats.addField('Uptime', `${(client.uptime / 3600000 % 24).toFixed()} hour\(s\)\n${(client.uptime / 60000 % 60).toFixed()} minute\(s\)\n${(client.uptime / 1000 % 60).toFixed()} second\(s\)`)
+  stats.addField('Uptime', `${hours}${minutes}${seconds}`)
   stats.setFooter('BOT done by Wizardλ#4559', 'https://cdn.discordapp.com/avatars/267727230296129536/d97af37c3284d8c18a7c314c7c3f7174.jpg?size=1024')
   stats.setColor('##00FFFD')
-  stats.addField('Counts', `Guilds: ${client.guilds.size}\nMembers: ${client.users.size}\nChannels: ${client.channels.size}`)
+  stats.addField('On', `${client.guilds.size} Guilds`)
+  stats.addField('With', `${client.users.size} Humans`)
+/////////////////////
 
   const fback = new Discord.RichEmbed()
   fback.setColor('#00FFFD')
@@ -148,8 +172,8 @@ client.on('message', message => {
   const serverstatus = new Discord.RichEmbed()
   serverstatus.setThumbnail(`${message.guild.iconURL}`)
   serverstatus.setAuthor(`${message.guild.name} Stats`)
-  serverstatus.addField('Owner', `${message.guild.owner}`)
-  serverstatus.addField('ID', `${message.guild.id}`)
+  serverstatus.addField('Owner', `${message.guild.owner}\nID: ${message.guild.owner.user.id}`)
+  serverstatus.addField('Guild ID', `${message.guild.id}`)
   serverstatus.addField('Member Count', `${message.guild.members.size}`)
   serverstatus.addField('Region', `${message.guild.region}`)
   serverstatus.addField('Channels', `${message.guild.channels.size}`)
@@ -194,6 +218,13 @@ client.on('message', message => {
   mdunk.setImage('https://cdn.discordapp.com/attachments/275135980481150976/299673369706496001/9wl5E10yNqE.jpg')
   mdunk.setColor('#846BF7')
 
+  const mpolice = new Discord.RichEmbed()
+  mpolice.setImage('https://cdn.discordapp.com/attachments/299632702087495680/302193800175026177/Sin_titulo.png')
+  mpolice.setColor('#846BF7')
+
+  const mdoit = new Discord.RichEmbed()
+  mdoit.setImage('https://cdn.discordapp.com/attachments/299632702087495680/302198705929584641/do_it_for_her___kanna_kamui_by_phosphobos-db1xlb1.jpg')
+  mdoit.setColor('#846BF7')
 ////////////////////////////////////
 //--------------------------------//
 //////////EVERYONE CAN DO //////////
@@ -233,6 +264,10 @@ client.on('message', message => {
     message.channel.sendEmbed(mdab)
   } else if (message.content.startsWith(prefix + 'drunk')) {
     message.channel.sendEmbed(mdunk)
+  } else if (message.content.startsWith(prefix + 'police')) {
+    message.channel.sendEmbed(mpolice)
+  } else if (message.content.startsWith(prefix + 'doit')) {
+    message.channel.sendEmbed(mdoit)
   } else if (message.content.startsWith(prefix + 'ping')) {
     message.channel.sendMessage('Eating insects...').then(msg => {
       msg.edit(`I took \`${msg.createdTimestamp - message.createdTimestamp} ms\` to eat all of them!`);
