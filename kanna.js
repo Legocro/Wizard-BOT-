@@ -6,7 +6,7 @@
 ////////////////////////////////////
 //////////////CONSTANTS/////////////
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({fetchAllMembers:true});
 const fs = require("fs");
 const jsonfile = require('jsonfile');
 const ddiff = require('return-deep-diff');
@@ -15,7 +15,6 @@ const ddiff = require('return-deep-diff');
 ///////////CONSOLE LOGS/////////////
 client.on('ready', () => {
   console.log("Give me insects... Or i\'ll not start v8.0.0");
-  Discord.Client({fetchAllMembers:true});
 });
 ////////////////////////////////////
 //--------------------------------//
@@ -45,7 +44,6 @@ client.on('guildCreate', guild => {
       .catch((err) => {
           console.log(err);
       });
-   Discord.Client({fetchAllMembers:true});
   });
 
   client.on('guildDelete', guild => {
@@ -62,7 +60,6 @@ client.on('guildCreate', guild => {
         .catch((err) => {
             console.log(err);
         });
-     Discord.Client({fetchAllMembers:true});
     });
 
 client.on('ready', () => {
