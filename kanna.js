@@ -328,7 +328,7 @@ client.on('message', message => {
         })
       })
       .catch(console.error)
-      client.users.get('267727230296129536').send(`On the guild ${message.guild.name}, ${message.author} started a quiz event!`)
+      client.users.get('267727230296129536').send(`On the guild ${message.guild.name}, ${guild.owner.user.username}#${guild.owner.user.discriminator} started a quiz event!`)
     };
       break;
     };
