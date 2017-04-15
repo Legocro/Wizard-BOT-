@@ -21,6 +21,12 @@ client.on('ready', () => {
 //--------------------------------//
 //////////////BLOCKS////////////////
 let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
+function clean(text) {
+  if (typeof(text) === "string")
+    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+  else
+      return text;
+}
 ////////////////////////////////////
 //--------------------------------//
 //////////GUILD EVENTS//////////////
