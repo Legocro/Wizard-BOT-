@@ -313,7 +313,6 @@ client.on('message', message => {
       message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
   }
-});
   };
 
   while (userMod) {
