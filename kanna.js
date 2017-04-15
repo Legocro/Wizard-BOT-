@@ -300,7 +300,20 @@ client.on('message', message => {
     } else if (message.content.startsWith(prefix + 'ss')) {
       if(!argresult) argresult = 'online';
       client.user.setStatus(argresult);
+    } else if (message.content.startsWith(prefix + "eval")) {
+    try {
+      var code = args.join(" ");
+      var evaled = eval(code);
+
+      if (typeof evaled !== "string")
+        evaled = require("util").inspect(evaled);
+
+      message.channel.sendCode("xl", clean(evaled));
+    } catch (err) {
+      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
+  }
+});
   };
 
   while (userMod) {
