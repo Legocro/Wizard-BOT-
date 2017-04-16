@@ -92,6 +92,7 @@ client.on('ready', () => {
 var prefix = "k!";
 client.on('message', message => {
   if (message.author.bot) return;
+   if(!member).then(m => m.fetchMember());
 ////////////EVENT HORIZON///////////
   var userMod = (message.member.roles.exists('name', 'Dragon Tamer')) || message.author.id === '267727230296129536';
   var mention = client.user;
