@@ -8,14 +8,13 @@
 const Discord = require('discord.js');
 const client = new Discord.Client({fetchAllMembers: true});
 const fs = require("fs");
-const jsonfile = require('jsonfile');
 const ddiff = require('return-deep-diff');
 const superagent = require('superagent');
 ////////////////////////////////////
 //--------------------------------//
 ///////////CONSOLE LOGS/////////////
 client.on('ready', () => {
-  console.log("Give me insects... Or i\'ll not start v8.0.0");
+  console.log("Give me insects... Or i\'ll not start v9.5.0");
 });
 ////////////////////////////////////
 //--------------------------------//
@@ -50,16 +49,28 @@ client.on('guildCreate', guild => {
       .catch((err) => {
           console.log(err);
       });
-      client.users.get('267727230296129536').send(`**I have joined __${guild.name}__**\n**Guild ID**: ${guild.id}`)
-      client.users.get('267727230296129536').send(`**Owner**: ${guild.owner.user.username}#${guild.owner.user.discriminator} & ${guild.ownerID}\n\n**Counts**`)
-      client.users.get('267727230296129536').send(`Members: ${guild.members.size} | ${guild.members.filter(g => g.user.bot === false).size} Humans | ${guild.members.filter(g => g.user.bot === true).size} Bots\nChannels: ${guild.channels.size}\n`)
-      client.users.get('267727230296129536').send(`Roles: ${guild.roles.size}\n\n**Guild Photo**\n${guild.iconURL}`)
-  });
+      const gcreate = new Discord.RichEmbed()
+      gcreate.setThumbnail(`${guild.iconURL}`)
+      gcreate.setTitle(`I have joined ${guild.name}`)
+      gcreate.setDescription(`More information below`)
+      gcreate.addField('Guild ID', `${guild.id}`, true)
+      gcreate.addField('Owner', `${guild.owner.user.username}#${guild.owner.user.discriminator}`, true)
+      gcreate.addField('Total Members', `${guild.members.size}`, true)
+      gcreate.addField('Humans', `${guild.members.filter(g => !g.user.bot).size}`, true)
+      gcreate.addField('Bots', `${guild.members.filter(g => g.user.bot).size}`, true)
+      gcreate.addField('Total Channels', `${guild.channels.size}`, true)
+      gcreate.addField('Text Channels', `${guild.channels.filter(c => c.type === "text").size}`, true)
+      gcreate.addField('Voice Channels', `${guild.channels.filter(c => c.type === "voice").size}`, true)
+      gcreate.addField('Role Size', `${guild.roles.size}`, true)
+      gcreate.addField('Role Names', `${guild.roles.map(r => r.name)}`, true)
+      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gcreate) 
+      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)      
+    });
 
     client.on('guildDelete', guild => {
     superagent
         .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-        .set("Authorization", "")
+        .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
         .set("Accept", "application/json")
         .send({ server_count: client.guilds.size })
         .then((res) => {
@@ -68,11 +79,22 @@ client.on('guildCreate', guild => {
         .catch((err) => {
             console.log(err);
         });
-        client.users.get('267727230296129536').send(`**I have left __${guild.name}__**\n**Guild ID**: ${guild.id}`)
-        client.users.get('267727230296129536').send(`**Owner**: ${guild.owner.user.username}#${guild.owner.user.discriminator} & ${guild.ownerID}\n\n**Counts**`)
-        client.users.get('267727230296129536').send(`Members: ${guild.members.size} | ${guild.members.filter(g => g.user.bot === false).size} Humans | ${guild.members.filter(g => g.user.bot === true).size} Bots\nChannels: ${guild.channels.size}\n`)
-        client.users.get('267727230296129536').send(`Roles: ${guild.roles.size}\n\n**Guild Photo**\n${guild.iconURL}`)
-        client.user.setGame(`k!help | on ${client.guilds.size} guilds`);
+      const gleave = new Discord.RichEmbed()
+      gleave.setThumbnail(`${guild.iconURL}`)
+      gleave.setTitle(`I have left ${guild.name}`)
+      gleave.setDescription(`More information below`)
+      gleave.addField('Guild ID', `${guild.id}`, true)
+      gleave.addField('Owner', `${guild.owner.user.username}#${guild.owner.user.discriminator}`, true)
+      gleave.addField('Total Members', `${guild.members.size}`, true)
+      gleave.addField('Humans', `${guild.members.filter(g => !g.user.bot).size}`, true)
+      gleave.addField('Bots', `${guild.members.filter(g => g.user.bot).size}`, true)
+      gleave.addField('Total Channels', `${guild.channels.size}`, true)
+      gleave.addField('Text Channels', `${guild.channels.filter(c => c.type === "text").size}`, true)
+      gleave.addField('Voice Channels', `${guild.channels.filter(c => c.type === "voice").size}`, true)
+      gleave.addField('Role Size', `${guild.roles.size}`, true)
+      gleave.addField('Role Names', `${guild.roles.map(r => r.name).join(", ")}`, true)
+      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gleave)
+      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)    
     });
 
 client.on('ready', () => {
@@ -181,15 +203,14 @@ let member = message.guild.member(message.mentions.users.first());
 
   const stats = new Discord.RichEmbed()
   stats.setAuthor('Stats for Kanna Kobayashi', 'https://cdn.discordapp.com/avatars/297459926505095180/36d9952998c1a24e3646af1a3e77cda6.jpg?size=1024');
-  stats.addField('Uptime', `${hours}${minutes}${seconds}`, true)
+  stats.addField('Uptime', `${hours}${minutes}${seconds}`)
   stats.setFooter('BOT done by Wizardλ#4559', 'https://cdn.discordapp.com/avatars/267727230296129536/d97af37c3284d8c18a7c314c7c3f7174.jpg?size=1024')
   stats.setColor('##00FFFD')
   stats.addField('Guild Count', `${client.guilds.size} Guilds`, true)
   stats.addField('Users Count', `${client.users.filter(u => u.bot === false).size} Humans`, true)
-  stats.addField('\u200b', '\u200b')
-  stats.addField('Current Version', 'v9.1.8')
-  stats.addField('Last Update', '- Fixed some minor issues that make the bot crash\n- Added new memes (Check \`k!help\`)\n- Improved \`k!bstats\` and \`k!gstats\`\n- Now it\'s possible to do commands with mention')
-  stats.addField('Working On', 'Relaxing for now ❤')
+  stats.addField('Current Version', 'v9.5.0')
+  stats.addField('Last Update', '- Fixed bot crash!\n- Added some cool features to the oficcial support\n- Changed \`k!gstats\` (Now show\'s more info)')
+  stats.addField('Working On', 'Won\'t work in anything \'til next week because of my tests ❤')
 
 /////////////////////
 
@@ -217,8 +238,10 @@ let member = message.guild.member(message.mentions.users.first());
   serverstatus.addField('Humans', `${message.guild.members.filter(u => u.user.bot === false).size}`, true)
   serverstatus.addField('Bots', `${message.guild.members.filter(u => u.user.bot === true).size}`, true)
   serverstatus.addField('Region', `${message.guild.region}`, true)
-  serverstatus.addField('Channel Amount', `${message.guild.channels.size}`, true)
-  serverstatus.addField('Role Amount', `${message.guild.roles.size}`, true)
+  serverstatus.addField('Total Channels', `${message.guild.channels.size}`, true)
+  serverstatus.addField('Text Channels', `${message.guild.channels.filter(c => c.type === "text").size}`, true)
+  serverstatus.addField('Voice Channels', `${message.guild.channels.filter(c => c.type === "voice").size}`, true)
+  serverstatus.addField('Total Roles', `${message.guild.roles.size}`, true)
   serverstatus.addField('Role Names', `${roleNames}`, true)
   serverstatus.setTimestamp()
   serverstatus.setFooter('Server Stats from', `${message.author.displayAvatarURL}`)
@@ -395,12 +418,14 @@ let member = message.guild.member(message.mentions.users.first());
     if (message.content.startsWith(prefix + 'ss') || message.content.startsWith(mention + ' ss')) {
       if(!argresult) argresult = 'online';
       client.user.setStatus(argresult);
-    } else if (message.content.startsWith(prefix + "eval") || message.content.startsWith(mention + ' eval')) {
+    } else if (message.content.startsWith(prefix + "eval")) {
     try {
       var code = args.join(" ");
       var evaled = eval(code);
       const evale = new Discord.RichEmbed()
-       evale.addField('Output', `${clean(evaled)}`)
+      evale.addField('Input', `${message.content.split(prefix + 'eval').slice(1)}`)
+      evale.addField('Output', `${clean(evaled)}`)
+      evale.setColor('#00FF00')
       
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
@@ -408,7 +433,9 @@ let member = message.guild.member(message.mentions.users.first());
       message.channel.sendEmbed(evale);
     } catch (err) {
        const evalet = new Discord.RichEmbed()
+       evalet.addField('Input', `${message.content.split(prefix + 'eval').slice(1)}`)
        evalet.addField('Error', `${clean(err)}`)
+       evalet.setColor('#FF0000')
       message.channel.sendEmbed(evalet);
     }
   }
