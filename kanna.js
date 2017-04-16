@@ -38,7 +38,6 @@ client.on('guildCreate', guild => {
     lastName: "Kobayashi",
     quizPhoto: "http://pm1.narvii.com/6366/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg",
   }
-  client.users.get('267727230296129536').send(`**I have joined __${guild.name}__**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner.user.username}#${guild.owner.user.discriminator}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}\n\n**Guild Photo**\n${guild.iconURL}`)
   client.user.setGame(`k!help | on ${client.guilds.size} guilds`);
   superagent
       .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
@@ -51,14 +50,16 @@ client.on('guildCreate', guild => {
       .catch((err) => {
           console.log(err);
       });
+      client.users.get('267727230296129536').send(`**I have joined __${guild.name}__**\n**Guild ID**: ${guild.id}`)
+      client.users.get('267727230296129536').send(`**Owner**: ${guild.owner.user.username}#${guild.owner.user.discriminator} & ${guild.ownerID}\n\n**Counts**`)
+      client.users.get('267727230296129536').send(`Members: ${guild.members.size} | ${guild.members.filter(g => g.user.bot === false).size} Humans | ${guild.members.filter(g => g.user.bot === true).size} Bots\nChannels: ${guild.channels.size}\n`)
+      client.users.get('267727230296129536').send(`Roles: ${guild.roles.size}\n\n**Guild Photo**\n${guild.iconURL}`)
   });
 
-  client.on('guildDelete', guild => {
-    client.users.get('267727230296129536').send(`**I have left __${guild.name}__**\n**Guild ID**: ${guild.id}!\n**Owner**: ${guild.owner.user.username}#${guild.owner.user.discriminator}, ${guild.ownerID}\n\n**Counts**\nMembers: ${guild.members.size}\nChannels: ${guild.channels.size}\nRoles: ${guild.roles.size}\n\n**Guild Photo**\n${guild.iconURL}`)
-    client.user.setGame(`k!help | on ${client.guilds.size} guilds`);
+    client.on('guildDelete', guild => {
     superagent
         .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
-        .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
+        .set("Authorization", "")
         .set("Accept", "application/json")
         .send({ server_count: client.guilds.size })
         .then((res) => {
@@ -67,6 +68,11 @@ client.on('guildCreate', guild => {
         .catch((err) => {
             console.log(err);
         });
+        client.users.get('267727230296129536').send(`**I have left __${guild.name}__**\n**Guild ID**: ${guild.id}`)
+        client.users.get('267727230296129536').send(`**Owner**: ${guild.owner.user.username}#${guild.owner.user.discriminator} & ${guild.ownerID}\n\n**Counts**`)
+        client.users.get('267727230296129536').send(`Members: ${guild.members.size} | ${guild.members.filter(g => g.user.bot === false).size} Humans | ${guild.members.filter(g => g.user.bot === true).size} Bots\nChannels: ${guild.channels.size}\n`)
+        client.users.get('267727230296129536').send(`Roles: ${guild.roles.size}\n\n**Guild Photo**\n${guild.iconURL}`)
+        client.user.setGame(`k!help | on ${client.guilds.size} guilds`);
     });
 
 client.on('ready', () => {
@@ -180,6 +186,8 @@ let member = message.guild.member(message.mentions.users.first());
   stats.setColor('##00FFFD')
   stats.addField('Guild Count', `${client.guilds.size} Guilds`, true)
   stats.addField('Users Count', `${client.users.filter(u => u.bot === false).size} Humans`, true)
+  stats.addField('\u200b', '\u200b')
+  stats.addField('Current Version', 'v9.1.8')
   stats.addField('Last Update', '- Fixed some minor issues that make the bot crash\n- Added new memes (Check \`k!help\`)\n- Improved \`k!bstats\` and \`k!gstats\`\n- Now it\'s possible to do commands with mention')
   stats.addField('Working On', 'Relaxing for now ❤')
 
@@ -367,15 +375,8 @@ let member = message.guild.member(message.mentions.users.first());
     message.channel.sendEmbed(mautist)
     message.delete()
   } else if (message.content.startsWith(prefix + 'ping') || message.content.startsWith(mention + ' ping')) {
-    if (message.isMentioned(client.user)) {
-      message.channel.sendMessage('Eating insects...').then(msg => {
-        msg.edit(`I took \`${msg.createdTimestamp - message.createdTimestamp} ms\` to eat all of them!`);
-        return;
-    })
-  };
-    message.channel.sendMessage('Eating insects...').then(msg => {
+    return message.channel.sendMessage('Eating insects...').then(msg => {
       msg.edit(`I took \`${msg.createdTimestamp - message.createdTimestamp} ms\` to eat all of them!`);
-      return;
     });
   } else if (message.content.startsWith(prefix + 'about') || message.content.startsWith(mention + ' about')) {
     message.channel.sendMessage(`**こんにちは(Kon'nichiwa) ${message.author}**\n\nI am **カンナカムイ\(Kanna Kamui\)** i live with Kobayashi-san... So call me **Kanna Kobayashi**!\n\nWell, i am at **Discord** to spread the love for anime and quiz!\nFirst of all, you need to assign to yourself a role called \"Dragon Tamer\"\nAfter you can do \`k!qstart\` to test if everything is good!\n\nTo set up a different character you have to do \`k!sfname <first name>\` to set the character first name, \`k!slname <last name>\` to set up the character last name and \`k!sqphoto <link>\` to set up the character photo, then just do \`k!qstart\`!\n\n**Join my support server if you have any questions!**\nhttps://discord.gg/uBdXdE9`)
@@ -415,17 +416,16 @@ let member = message.guild.member(message.mentions.users.first());
       message.author.sendEmbed(tamerUser);
     } else if (message.content.startsWith(prefix + 'sfname') || message.content.startsWith(mention + ' sfname')) {
       message.channel.sendMessage(`The first name has changed sucessfully ${message.author}`)
-      names[message.guild.id].firstName = args[0];
-    } else if (message.content.startsWith(prefix + 'slname') || message.content.startsWith(mention + ' slname')) {
+      names[message.guild.id].firstName = message.content.split('k!' || mention).slice(1).join(' ');
+    } else if (message.content.startsWith(prefix + 'slname')) {
       message.channel.sendMessage(`The last name has changed sucessfully ${message.author}`);
       names[message.guild.id].lastName = args[0];
-    } else if (message.content.startsWith(prefix + 'sqphoto') || message.content.startsWith(mention + ' sqphoto')) {
+    } else if (message.content.startsWith(prefix + 'sqphoto')) {
       message.channel.sendMessage(`The quiz photo has changed sucessfully ${message.author}`);
       names[message.guild.id].quizPhoto = args[0];
-    } else if (message.content.startsWith(prefix + 'event') || message.content.startsWith(mention + ' event')) {
-      message.guild.defaultChannel.sendMessage("**People around @here! There is a quiz event coming!");
     } else if (message.content.startsWith(prefix + 'qstart') || message.content.startsWith(mention + ' qstart')) {
       message.channel.sendEmbed(embed)
+      message.delete()
       .then(() => {
         message.channel.awaitMessages(response => response.content.startsWith(firstname) || response.content === lastname || response.content === lastname.toLowerCase() || response.content.startsWith(firstname.toLowerCase()) || response.content === firstname + ' ' +  lastname || response.content === firstname.toLowerCase() + ' ' + lastname.toLowerCase(), {
           max: 1,
@@ -441,7 +441,6 @@ let member = message.guild.member(message.mentions.users.first());
       })
       .catch(console.error)
       client.users.get('267727230296129536').send(`On the guild ${message.guild.name}, ${message.guild.owner.user.username}#${message.guild.owner.user.discriminator} started a quiz event!`)
-      message.delete()
     };
       break;
     };
