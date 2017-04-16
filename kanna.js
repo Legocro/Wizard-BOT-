@@ -161,10 +161,10 @@ let member = message.guild.member(message.mentions.users.first());
   tamerUser.setURL('https://discord.gg/uBdXdE9')
   tamerUser.addField('Prefix', 'Mention or k!')
   tamerUser.addField('Tamer Commands',
-    '\`sqphoto <link>\` sets the character photo\n\`sfname < first name>\` sets the character first name\n\`slname <last name>\` sets the character last name\n\`qstart\` starts the event')
-  tamerUser.addField('Common Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true)
-  tamerUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`\n\`police\`\n\`doit\`', true)
-  tamerUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`', true)
+    '\`sqphoto <link>\` sets the character photo\n\`sfname <first name>\` sets the character first name\n\`slname <last name>\` sets the character last name\n\`qstart\` starts the event')
+  tamerUser.addField('Common Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true)
+  tamerUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`', true)
+  tamerUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true)
 
   const commonUser = new Discord.RichEmbed()
   commonUser.setTitle(`**アホイ\(Ahoi\) ${message.author.username}**`)
@@ -174,9 +174,9 @@ let member = message.guild.member(message.mentions.users.first());
   commonUser.setFooter('BOT done by Wizardλ#4559', 'https://cdn.discordapp.com/avatars/267727230296129536/d97af37c3284d8c18a7c314c7c3f7174.jpg?size=1024');
   commonUser.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg');
   commonUser.setURL('https://discord.gg/uBdXdE9')
-  commonUser.addField('Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true)
-  commonUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`\n\`police\`\n\`doit\`', true)
-  commonUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`', true)
+  commonUser.addField('Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true)
+  commonUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`', true)
+  commonUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true)
 //////////////////////
 
   let minutes;
@@ -208,20 +208,30 @@ let member = message.guild.member(message.mentions.users.first());
   stats.setColor('##00FFFD')
   stats.addField('Guild Count', `${client.guilds.size} Guilds`, true)
   stats.addField('Users Count', `${client.users.filter(u => u.bot === false).size} Humans`, true)
-  stats.addField('Current Version', 'v9.5.0')
-  stats.addField('Last Update', '- Fixed bot crash!\n- Added some cool features to the oficcial support\n- Changed \`k!gstats\` (Now show\'s more info)')
-  stats.addField('Working On', 'Won\'t work in anything \'til next week because of my tests ❤')
+  stats.addField('Current Version', 'v9.7.0')
+  stats.addField('Last Update', '- Added `k!request`\n\- "Fixed\" \`k!help\`\n- Now Requests and Feedbacks are sent directly to the support guild')
+  stats.addField('Working On', 'Will try to not work in anything \'til next week because of my tests ❤')
 
 /////////////////////
 
   const fback = new Discord.RichEmbed()
-  fback.setColor('#00FFFD')
+  fback.setColor('#ffd750')
   fback.setTimestamp()
   fback.setFooter('Received', `${message.author.displayAvatarURL}`)
-  fback.setTitle(`New feedback sent to you my overlord`)
-  fback.setDescription(`//-----------//`)
-  fback.addField('User Feedback', `${message.content.split(prefix + 'feedback').slice(1)}`)
+  fback.setTitle(`New feedback`)
+  fback.setDescription(`${client.guilds.get('298969150133370880').roles.find('name', 'Support')} check this!`)
+  fback.addField('User Feedback', `${message.content.split(prefix + 'feedback').slice(1).join(" ")}`)
   fback.addField('Informations', `**Username:** ${message.author}\n**User ID:** ${message.author.id}\n**Guild Name:** ${message.guild.name}\n**Guild ID:** ${message.guild.id}\n**Message ID:** ${message.id}`)
+
+  const request = new Discord.RichEmbed()
+  request.setColor('#322254')
+  request.setTimestamp()
+  request.setFooter('Received', `${message.author.displayAvatarURL}`)
+  request.setTitle(`New request`)
+  request.setDescription(`${client.guilds.get('298969150133370880').roles.find('name', 'Support')} check this!`)
+  request.addField('User Request', `${message.content.split(prefix + 'request').slice(1).join(" ")}`)
+  request.addField('Informations', `**Username:** ${message.author}\n**User ID:** ${message.author.id}\n**Guild Name:** ${message.guild.name}\n**Guild ID:** ${message.guild.id}\n**Message ID:** ${message.id}`)
+
 
   let roleNames = `${message.guild.roles.map(r => r.name).join(", ")}`
   if(message.guild.roles.map(r => r.name).size > 50) {
@@ -405,9 +415,12 @@ let member = message.guild.member(message.mentions.users.first());
     message.channel.sendMessage(`**こんにちは(Kon'nichiwa) ${message.author}**\n\nI am **カンナカムイ\(Kanna Kamui\)** i live with Kobayashi-san... So call me **Kanna Kobayashi**!\n\nWell, i am at **Discord** to spread the love for anime and quiz!\nFirst of all, you need to assign to yourself a role called \"Dragon Tamer\"\nAfter you can do \`k!qstart\` to test if everything is good!\n\nTo set up a different character you have to do \`k!sfname <first name>\` to set the character first name, \`k!slname <last name>\` to set up the character last name and \`k!sqphoto <link>\` to set up the character photo, then just do \`k!qstart\`!\n\n**Join my support server if you have any questions!**\nhttps://discord.gg/uBdXdE9`)
   } else if (message.content.startsWith(prefix + 'invite') || message.content.startsWith(mention + ' invite')) {
     message.channel.sendMessage(`Invite me to your server ${message.author}!\nhttps://discordapp.com/oauth2/authorize?permissions=1341643977&scope=bot&client_id=297459926505095180`)
-  } else if (message.content.startsWith(prefix + 'feedback') || message.content.startsWith(mention + ' feedback')) {
-    client.users.get('267727230296129536').sendEmbed(fback)
-    message.channel.sendMessage(`A feedback has been sent to the overlord!`)
+  } else if (message.content.startsWith(prefix + 'feedback')) {
+    client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(fback)
+    message.channel.sendMessage(`A feedback has been sent to the overlords!`)
+  } else if (message.content.startsWith(prefix + 'request')) {
+    client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(request)
+    message.channel.sendMessage(`A request has been sent to the overlords!`)
   } else if (message.content.startsWith(prefix + 'bstats') || message.content.startsWith(mention + ' bstats')) {
     message.channel.sendEmbed(stats)
   } else if (message.content.startsWith(prefix + 'gstats') || message.content.startsWith(mention + ' gstats')) {
@@ -471,7 +484,6 @@ let member = message.guild.member(message.mentions.users.first());
         })
       })
       .catch(console.error)
-      client.users.get('267727230296129536').send(`On the guild ${message.guild.name}, ${message.guild.owner.user.username}#${message.guild.owner.user.discriminator} started a quiz event!`)
     };
       break;
     };
