@@ -399,13 +399,17 @@ let member = message.guild.member(message.mentions.users.first());
     try {
       var code = args.join(" ");
       var evaled = eval(code);
+      const evale = new Discord.RichEmbed()
+       evale.addField('Output’, `${clean(evaled}`)
+      const evalet = newDiscord.RichEmbed()
+       evalet.addField('Error’, `${clean(err)}`)
 
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
 
-      message.channel.sendCode("xl", clean(evaled));
+      message.channel.sendEmbed(evale);
     } catch (err) {
-      message.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      message.channel.sendEmbed(evalet);
     }
   }
   };
