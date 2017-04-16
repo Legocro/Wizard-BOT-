@@ -401,14 +401,14 @@ let member = message.guild.member(message.mentions.users.first());
       var evaled = eval(code);
       const evale = new Discord.RichEmbed()
        evale.addField('Output', `${clean(evaled)}`)
-      const evalet = new Discord.RichEmbed()
-       evalet.addField('Error', `${clean(err)}`)
-
+      
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
 
       message.channel.sendEmbed(evale);
     } catch (err) {
+       const evalet = new Discord.RichEmbed()
+       evalet.addField('Error', `${clean(err)}`)
       message.channel.sendEmbed(evalet);
     }
   }
