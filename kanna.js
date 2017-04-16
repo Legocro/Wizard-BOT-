@@ -402,7 +402,7 @@ let member = message.guild.member(message.mentions.users.first());
       const evale = new Discord.RichEmbed()
        evale.addField('Output', `${clean(evaled)}`)
       const evalet = newDiscord.RichEmbed()
-       evalet.addField('Error’, `${clean(err)}`)
+       evalet.addField('Error, `${clean(err)}`)
 
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
