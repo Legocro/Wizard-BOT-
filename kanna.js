@@ -400,7 +400,7 @@ let member = message.guild.member(message.mentions.users.first());
       var code = args.join(" ");
       var evaled = eval(code);
       const evale = new Discord.RichEmbed()
-       evale.addField('Output’, `${clean(evaled)}`)
+       evale.addField('Output, `${clean(evaled)}`)
       const evalet = newDiscord.RichEmbed()
        evalet.addField('Error’, `${clean(err)}`)
 
