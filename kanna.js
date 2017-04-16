@@ -63,8 +63,8 @@ client.on('guildCreate', guild => {
       gcreate.addField('Voice Channels', `${guild.channels.filter(c => c.type === "voice").size}`, true)
       gcreate.addField('Role Size', `${guild.roles.size}`, true)
       gcreate.addField('Role Names', `${guild.roles.map(r => r.name)}`, true)
-      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gcreate) 
-      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)      
+      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gcreate)
+      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)
     });
 
     client.on('guildDelete', guild => {
@@ -94,7 +94,7 @@ client.on('guildCreate', guild => {
       gleave.addField('Role Size', `${guild.roles.size}`, true)
       gleave.addField('Role Names', `${guild.roles.map(r => r.name).join(", ")}`, true)
       client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gleave)
-      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)    
+      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)
     });
 
 client.on('ready', () => {
@@ -416,10 +416,10 @@ let member = message.guild.member(message.mentions.users.first());
   } else if (message.content.startsWith(prefix + 'invite') || message.content.startsWith(mention + ' invite')) {
     message.channel.sendMessage(`Invite me to your server ${message.author}!\nhttps://discordapp.com/oauth2/authorize?permissions=1341643977&scope=bot&client_id=297459926505095180`)
   } else if (message.content.startsWith(prefix + 'feedback')) {
-    client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(fback)
+    client.guilds.get('298969150133370880').channels.get('302982607182888961').sendEmbed(fback)
     message.channel.sendMessage(`A feedback has been sent to the overlords!`)
   } else if (message.content.startsWith(prefix + 'request')) {
-    client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(request)
+    client.guilds.get('298969150133370880').channels.get('299632702087495680').sendEmbed(request)
     message.channel.sendMessage(`A request has been sent to the overlords!`)
   } else if (message.content.startsWith(prefix + 'bstats') || message.content.startsWith(mention + ' bstats')) {
     message.channel.sendEmbed(stats)
@@ -439,7 +439,7 @@ let member = message.guild.member(message.mentions.users.first());
       evale.addField('Input', `${message.content.split(prefix + 'eval').slice(1)}`)
       evale.addField('Output', `${clean(evaled)}`)
       evale.setColor('#00FF00')
-      
+
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
 
