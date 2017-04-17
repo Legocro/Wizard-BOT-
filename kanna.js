@@ -239,7 +239,7 @@ let member = message.guild.member(message.mentions.users.first());
   };
 
   const serverstatus = new Discord.RichEmbed()
-  serverstatus.setThumbnail(`${message.guild.displayIconURL}`)
+  serverstatus.setThumbnail(message.guild.displayIconURL)
   serverstatus.addField('Guild Name', `${message.guild.name}`)
   serverstatus.addField('Guild ID', `${message.guild.id}`, true)
   serverstatus.addField('Owner', `${message.guild.owner}`, true)
