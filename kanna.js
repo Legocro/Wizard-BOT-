@@ -247,8 +247,8 @@ if(message.guild.iconURL) {
 
 
   let roleNames = `${message.guild.roles.map(r => r.name).join(", ")}`
-  if(message.guild.roles.map(r => r.name).size > 50) {
-    roleNames = `Too many roles!\(${message.guild.roles.map(r => r.name).size}\)`
+  if(message.guild.roles.size > 20) {
+    roleNames = `Too many roles!\(${message.guild.roles.size}\)`
   };
 
   const serverstatus = new Discord.RichEmbed()
