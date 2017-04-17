@@ -16,6 +16,8 @@ const superagent = require('superagent');
 client.on('ready', () => {
   console.log("Give me insects... Or i\'ll not start v9.5.0");
 });
+
+
 ////////////////////////////////////
 //--------------------------------//
 //////////////BLOCKS////////////////
@@ -132,7 +134,10 @@ let member = message.guild.member(message.mentions.users.first());
 /* also users.find() and whatever. */
 
 ///////////////////FUNCTIONS//////////////////////
-
+   let imMad;
+if(message.guild.iconURL) {
+   imMad = `${message.guild.iconURL}`
+   }
 //////////////////////////////////////////////////
 
 /////////////////////EMBEDS///////////////////////
@@ -239,7 +244,7 @@ let member = message.guild.member(message.mentions.users.first());
   };
 
   const serverstatus = new Discord.RichEmbed()
-  serverstatus.setThumbnail(message.guild.displayIconURL)
+  serverstatus.setThumbnail(imMad)
   serverstatus.addField('Guild Name', `${message.guild.name}`)
   serverstatus.addField('Guild ID', `${message.guild.id}`, true)
   serverstatus.addField('Owner', `${message.guild.owner}`, true)
