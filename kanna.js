@@ -14,7 +14,7 @@ const superagent = require('superagent');
 //--------------------------------//
 ///////////CONSOLE LOGS/////////////
 client.on('ready', () => {
-  console.log("Give me insects... Or i\'ll not start v9.5.0");
+  console.log("Give me insects... Or i\'ll not start v9.8.0");
 });
 
 
@@ -51,10 +51,18 @@ client.on('guildCreate', guild => {
       .catch((err) => {
           console.log(err);
       });
+
       let fuccMe;
+      let fuccUs;
       if(guild.iconURL) {
          fuccMe = `${guild.iconURL}`
-         }
+       };
+       if(guild.roles.map(r => r.name).join(", ").length <= 1024) {
+         let fuccUs = guild.roles.map(r => r.name)
+       } else if(guild.roles.map(r => r.name).join(", ").length >= 1024) {
+         let fuccUs = `Too many characters \(${guild.roles.map(r => r.name).join(", ").length}\)`
+       };
+
       const gcreate = new Discord.RichEmbed()
       gcreate.setThumbnail(fuccMe)
       gcreate.setTitle(`I have joined ${guild.name}`)
@@ -67,8 +75,8 @@ client.on('guildCreate', guild => {
       gcreate.addField('Total Channels', `${guild.channels.size}`, true)
       gcreate.addField('Text Channels', `${guild.channels.filter(c => c.type === "text").size}`, true)
       gcreate.addField('Voice Channels', `${guild.channels.filter(c => c.type === "voice").size}`, true)
-      gcreate.addField('Role Size', `${guild.roles.size}`, true)
-      gcreate.addField('Role Names', `${guild.roles.map(r => r.name)}`, true)
+      gcreate.addField('Total Roles', `${guild.roles.size}`, true)
+      gcreate.addField('Role Names', fuccUs, true)
       client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gcreate)
       client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)
     });
@@ -85,10 +93,18 @@ client.on('guildCreate', guild => {
         .catch((err) => {
             console.log(err);
         });
-       let fuccMe;
-      if(guild.iconURL) {
-         fuccMe = `${guild.iconURL}`
-         }
+
+        let fuccMe;
+        let fuccUs;
+        if(guild.iconURL) {
+           fuccMe = `${guild.iconURL}`
+         };
+         if(guild.roles.map(r => r.name).join(", ").length <= 1024) {
+           let fuccUs = guild.roles.map(r => r.name)
+         } else if(guild.roles.map(r => r.name).join(", ").length >= 1024) {
+           let fuccUs = `Too many characters \(${guild.roles.map(r => r.name).join(", ").length}\)`
+         };
+
       const gleave = new Discord.RichEmbed()
       gleave.setThumbnail(fuccMe)
       gleave.setTitle(`I have left ${guild.name}`)
@@ -101,8 +117,8 @@ client.on('guildCreate', guild => {
       gleave.addField('Total Channels', `${guild.channels.size}`, true)
       gleave.addField('Text Channels', `${guild.channels.filter(c => c.type === "text").size}`, true)
       gleave.addField('Voice Channels', `${guild.channels.filter(c => c.type === "voice").size}`, true)
-      gleave.addField('Role Size', `${guild.roles.size}`, true)
-      gleave.addField('Role Names', `${guild.roles.map(r => r.name).join(", ")}`, true)
+      gleave.addField('Total Roles', `${guild.roles.size}`, true)
+      gleave.addField('Role Names', fuccUs, true)
       client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gleave)
       client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)
     });
@@ -142,10 +158,17 @@ let member = message.guild.member(message.mentions.users.first());
 /* also users.find() and whatever. */
 
 ///////////////////FUNCTIONS//////////////////////
-   let imMad;
+let fuccMe;
+let fuccUs;
 if(message.guild.iconURL) {
-   imMad = `${message.guild.iconURL}`
-   }
+   fuccMe = `${message.guild.iconURL}`
+ };
+ if(message.guild.roles.map(r => r.name).join(", ").length <= 1024) {
+   let fuccUs = message.guild.roles.map(r => r.name)
+ } else if(message.guild.roles.map(r => r.name).join(", ").length >= 1024) {
+   let fuccUs = `Too many characters \(${message.guild.roles.map(r => r.name).join(", ").length}\)`
+ };
+
 //////////////////////////////////////////////////
 
 /////////////////////EMBEDS///////////////////////
@@ -219,10 +242,10 @@ if(message.guild.iconURL) {
   stats.addField('Uptime', `${hours}${minutes}${seconds}`)
   stats.setFooter('BOT done by Wizardλ#4559', 'https://cdn.discordapp.com/avatars/267727230296129536/d97af37c3284d8c18a7c314c7c3f7174.jpg?size=1024')
   stats.setColor('##00FFFD')
-  stats.addField('Guild Count', `${client.guilds.size} Guilds`, true)
-  stats.addField('Users Count', `${client.users.filter(u => u.bot === false).size} Humans`, true)
-  stats.addField('Current Version', 'v9.7.0')
-  stats.addField('Last Update', '- Added `k!request`\n\- "Fixed\" \`k!help\`\n- Now Requests and Feedbacks are sent directly to the support guild')
+  stats.addField('Total Guilds', `${client.guilds.size} Guilds`, true)
+  stats.addField('Total Users', `${client.users.filter(u => u.bot === false).size} Humans`, true)
+  stats.addField('Current Version', 'v9.8.0')
+  stats.addField('Last Update', '- Fixed embed problems')
   stats.addField('Working On', 'Will try to not work in anything \'til next week because of my tests ❤')
 
 /////////////////////
@@ -245,14 +268,8 @@ if(message.guild.iconURL) {
   request.addField('User Request', `${message.content.split(prefix + 'request').slice(1).join(" ")}`)
   request.addField('Informations', `**Username:** ${message.author}\n**User ID:** ${message.author.id}\n**Guild Name:** ${message.guild.name}\n**Guild ID:** ${message.guild.id}\n**Message ID:** ${message.id}`)
 
-
-  let roleNames = `${message.guild.roles.map(r => r.name).join(", ")}`
-  if(message.guild.roles.size > 20) {
-    roleNames = `Too many roles!\(${message.guild.roles.size}\)`
-  };
-
   const serverstatus = new Discord.RichEmbed()
-  serverstatus.setThumbnail(imMad)
+  serverstatus.setThumbnail(fuccMe)
   serverstatus.addField('Guild Name', `${message.guild.name}`)
   serverstatus.addField('Guild ID', `${message.guild.id}`, true)
   serverstatus.addField('Owner', `${message.guild.owner}`, true)
@@ -265,7 +282,7 @@ if(message.guild.iconURL) {
   serverstatus.addField('Text Channels', `${message.guild.channels.filter(c => c.type === "text").size}`, true)
   serverstatus.addField('Voice Channels', `${message.guild.channels.filter(c => c.type === "voice").size}`, true)
   serverstatus.addField('Total Roles', `${message.guild.roles.size}`, true)
-  serverstatus.addField('Role Names', `${roleNames}`, true)
+  serverstatus.addField('Role Names', fuccUs, true)
   serverstatus.setTimestamp()
   serverstatus.setFooter('Server Stats from', `${message.author.displayAvatarURL}`)
 
