@@ -51,8 +51,12 @@ client.on('guildCreate', guild => {
       .catch((err) => {
           console.log(err);
       });
+      let fuccMe;
+      if(guild.iconURL) {
+         fuccMe = `${guild.iconURL}`
+         }
       const gcreate = new Discord.RichEmbed()
-      gcreate.setThumbnail(`${guild.displayIconURL}`)
+      gcreate.setThumbnail(fuccMe)
       gcreate.setTitle(`I have joined ${guild.name}`)
       gcreate.setDescription(`More information below`)
       gcreate.addField('Guild ID', `${guild.id}`, true)
@@ -81,8 +85,12 @@ client.on('guildCreate', guild => {
         .catch((err) => {
             console.log(err);
         });
+       let fuccMe;
+      if(guild.iconURL) {
+         fuccMe = `${guild.iconURL}`
+         }
       const gleave = new Discord.RichEmbed()
-      gleave.setThumbnail(`${guild.displayIconURL}`)
+      gleave.setThumbnail(fuccMe)
       gleave.setTitle(`I have left ${guild.name}`)
       gleave.setDescription(`More information below`)
       gleave.addField('Guild ID', `${guild.id}`, true)
