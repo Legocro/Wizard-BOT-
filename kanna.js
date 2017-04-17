@@ -50,7 +50,7 @@ client.on('guildCreate', guild => {
           console.log(err);
       });
       const gcreate = new Discord.RichEmbed()
-      gcreate.setThumbnail(`${guild.iconURL}`)
+      gcreate.setThumbnail(`${guild.displayIconURL}`)
       gcreate.setTitle(`I have joined ${guild.name}`)
       gcreate.setDescription(`More information below`)
       gcreate.addField('Guild ID', `${guild.id}`, true)
@@ -80,7 +80,7 @@ client.on('guildCreate', guild => {
             console.log(err);
         });
       const gleave = new Discord.RichEmbed()
-      gleave.setThumbnail(`${guild.iconURL}`)
+      gleave.setThumbnail(`${guild.displayIconURL}`)
       gleave.setTitle(`I have left ${guild.name}`)
       gleave.setDescription(`More information below`)
       gleave.addField('Guild ID', `${guild.id}`, true)
@@ -239,7 +239,7 @@ let member = message.guild.member(message.mentions.users.first());
   };
 
   const serverstatus = new Discord.RichEmbed()
-  serverstatus.setThumbnail(`${message.guild.iconURL}`)
+  serverstatus.setThumbnail(`${message.guild.displayIconURL}`)
   serverstatus.addField('Guild Name', `${message.guild.name}`)
   serverstatus.addField('Guild ID', `${message.guild.id}`, true)
   serverstatus.addField('Owner', `${message.guild.owner}`, true)
