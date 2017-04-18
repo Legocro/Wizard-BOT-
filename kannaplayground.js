@@ -58,9 +58,9 @@ client.on('guildCreate', guild => {
          fuccMe = `${guild.iconURL}`
        };
        if(guild.roles.map(r => r.name).join(", ").length <= 1024) {
-         let fuccUs = guild.roles.map(r => r.name)
+         fuccUs = guild.roles.map(r => r.name).join(", ")
        } else if(guild.roles.map(r => r.name).join(", ").length >= 1024) {
-         let fuccUs = `Too many characters \(${guild.roles.map(r => r.name).join(", ").length}\)`
+         fuccUs = `Too many characters \(${guild.roles.map(r => r.name).join(", ").length}\)`
        };
 
       const gcreate = new Discord.RichEmbed()
@@ -78,7 +78,7 @@ client.on('guildCreate', guild => {
       gcreate.addField('Total Roles', `${guild.roles.size}`, true)
       gcreate.addField('Role Names', fuccUs, true)
       client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gcreate)
-      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)
+      client.users.get('267727230296129536').send(`**I joined a guild and i am now on \`${client.guilds.size}\` guilds!**`)
     });
 
     client.on('guildDelete', guild => {
@@ -100,9 +100,9 @@ client.on('guildCreate', guild => {
            fuccMe = `${guild.iconURL}`
          };
          if(guild.roles.map(r => r.name).join(", ").length <= 1024) {
-           let fuccUs = guild.roles.map(r => r.name)
+           fuccUs = guild.roles.map(r => r.name).join(", ")
          } else if(guild.roles.map(r => r.name).join(", ").length >= 1024) {
-           let fuccUs = `Too many characters \(${guild.roles.map(r => r.name).join(", ").length}\)`
+           fuccUs = `Too many characters \(${guild.roles.map(r => r.name).join(", ").length}\)`
          };
 
       const gleave = new Discord.RichEmbed()
@@ -120,7 +120,7 @@ client.on('guildCreate', guild => {
       gleave.addField('Total Roles', `${guild.roles.size}`, true)
       gleave.addField('Role Names', fuccUs, true)
       client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gleave)
-      client.guilds.get('298969150133370880').channels.get('303180857030606849').sendMessage(`**I am now on \`${client.guilds.size}\` guilds!**`)
+      client.users.get('267727230296129536').send(`**I left a guild and i am now on \`${client.guilds.size}\` guilds!**`)
     });
 
 client.on('ready', () => {
@@ -164,9 +164,9 @@ if(message.guild.iconURL) {
    fuccMe = `${message.guild.iconURL}`
  };
  if(message.guild.roles.map(r => r.name).join(", ").length <= 1024) {
-   let fuccUs = message.guild.roles.map(r => r.name)
+   fuccUs = message.guild.roles.map(r => r.name).join(", ")
  } else if(message.guild.roles.map(r => r.name).join(", ").length >= 1024) {
-   let fuccUs = `Too many characters \(${message.guild.roles.map(r => r.name).join(", ").length}\)`
+   fuccUs = `Too many characters \(${message.guild.roles.map(r => r.name).join(", ").length}\)`
  };
 
 //////////////////////////////////////////////////
