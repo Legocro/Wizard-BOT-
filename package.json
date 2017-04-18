@@ -1,0 +1,21 @@
+{
+  "name": "kannakobayashi",
+  "version": "9.8.0",
+  "description": "cutest dragon you will ever see.",
+  "main": "kanna.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wizard",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.0.0",
+    "jsonfile": "^2.4.0",
+    "opusscript": "0.0.3",
+    "return-deep-diff": "^0.2.7",
+    "uws": "^0.14.1"
+  },
+  "engines": {
+    "node": "v7.7.4"
+  }
+}
