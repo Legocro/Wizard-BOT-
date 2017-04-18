@@ -141,7 +141,7 @@ var prefix = "k!";
 client.on('message', message => {
   if (message.author.bot) return;
 ////////////EVENT HORIZON///////////
-  var userMod = (message.member.roles.exists('name', 'Dragon Tamer')) || message.author.id === '267727230296129536';
+  var userMod = message.member.roles.exists('name', 'Dragon Tamer') || message.author.id === '267727230296129536';
   var mention = client.user;
 ////////////////////////////////////
   var args = message.content.split(' ').slice(1);
