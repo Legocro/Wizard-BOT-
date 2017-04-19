@@ -1,10 +1,7 @@
 {
   "name": "kannakobayashi",
-<<<<<<< HEAD
   "version": "9.8.0",
-=======
   "version": "9.5.0",
->>>>>>> 77ff07929ce761611077e88ce9854ab7aa85829f
   "description": "cutest dragon you will ever see.",
   "main": "kanna.js",
   "scripts": {
