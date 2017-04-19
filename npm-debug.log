@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 0 info it worked if it ends with ok
 1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
 1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
@@ -190,4 +189,3 @@
 44 error This is most likely not a problem with npm itself.
 44 error Please check if you have git installed and in your PATH.
 45 verbose exit [ 1, true ]
->>>>>>> 77ff07929ce761611077e88ce9854ab7aa85829f

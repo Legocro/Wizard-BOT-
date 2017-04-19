@@ -23,6 +23,7 @@ client.on('ready', () => {
 //--------------------------------//
 //////////////BLOCKS////////////////
 let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
+
 function clean(text) {
   if (typeof(text) === "string")
     return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
@@ -140,6 +141,7 @@ client.on('ready', () => {
 //////////CLIENT EVENTS/////////////
 var prefix = "k!";
 client.on('message', message => {
+  if(client.guilds.get('304031909648793602' || '304031909648793602')) return;
   if (message.author.bot) return;
 ////////////EVENT HORIZON///////////
   var userMod = (message.member.roles.exists('name', 'Dragon Tamer')) || message.author.id === '267727230296129536';
@@ -202,6 +204,7 @@ if(message.guild.iconURL) {
   tamerUser.addField('Common Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true);
   tamerUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`', true);
   tamerUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true);
+  tamerUser.addField('Memes Gen. 3 (Current)', '\`delete\`\n\`joke\`\n\`brain\`')
 
   const commonUser = new Discord.RichEmbed()
   commonUser.setTitle(`**アホイ\(Ahoi\) ${message.author.username}**`)
@@ -213,7 +216,8 @@ if(message.guild.iconURL) {
   commonUser.setURL('https://discord.gg/uBdXdE9')
   commonUser.addField('Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true);
   commonUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`', true);
-  commonUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true);
+  commonUser.addField('Memes Gen. 2', '\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true);
+  commonUser.addField('Memes Gen. 3 (Current)', '\`delete\`\n\`joke\`\n\`brain\`')
 //////////////////////
 
   let minutes;
@@ -246,7 +250,7 @@ if(message.guild.iconURL) {
   stats.addField('Total Guilds', `${client.guilds.size} Guilds`, true);
   stats.addField('Total Users', `${client.users.filter(u => u.bot === false).size} Humans`, true);
   stats.addField('Current Version', 'v9.8.0');
-  stats.addField('Last Update', '- Fixed embed problems');
+  stats.addField('Last Update', '- Added meme generation 3 (\`delete\`, \`joke\` and \`brain\`)');
   stats.addField('Working On', 'Will try to not work in anything \'til next week because of my tests ❤');
 
 /////////////////////
@@ -288,6 +292,9 @@ if(message.guild.iconURL) {
   serverstatus.setFooter('Server Stats from', `${message.author.displayAvatarURL}`);
 
 //--------------------------------//
+//var lolimeme = ['https://cdn.discordapp.com/attachments/269129409888256000/300666636946374656/1491677914_giphy_2.gif', 'https://cdn.discordapp.com/attachments/275135980481150976/299263322157744128/aKVvBp1_460s.png'];
+//var randloli = lolimeme[Math.floor(Math.random() * lolimeme.length)];
+//var autisticmeme = ['', '']
 ///////////MEME EMBDES//////////////
 
   const mpregnant = new Discord.RichEmbed();
@@ -302,7 +309,7 @@ if(message.guild.iconURL) {
 
   const mloli = new Discord.RichEmbed();
   mloli.setTitle('Hmm... A hooman');
-  mloli.setImage('https://cdn.discordapp.com/attachments/275135980481150976/299263322157744128/aKVvBp1_460s.png');
+  mloli.setImage('https://cdn.discordapp.com/attachments/269129409888256000/300666636946374656/1491677914_giphy_2.gif');
   mloli.setColor('#846BF7');
 
   const mtriggered = new Discord.RichEmbed();
@@ -468,6 +475,15 @@ if(message.guild.iconURL) {
     message.channel.sendEmbed(stats)
   } else if (message.content.startsWith(prefix + 'gstats') || message.content.startsWith(mention + ' gstats')) {
     message.channel.sendEmbed(serverstatus)
+  } else if(message.content.startsWith(prefix + 'brain') || message.content.startsWith(mention + ' brain')) {
+    message.channel.sendEmbed(mbrain);
+    message.delete();
+  } else if(message.content.startsWith(prefix + 'joke') || message.content.startsWith(mention + ' joke')) {
+    message.channel.sendEmbed(mjoke);
+    message.delete();
+  } else if(message.content.startsWith(prefix + 'delete') || message.content.startsWith(mention + ' delete')) {
+    message.channel.sendEmbed(mdelete);
+    message.delete()
   } else
 
   if (message.author.id === '267727230296129536') {
@@ -495,9 +511,10 @@ if(message.guild.iconURL) {
       message.channel.sendEmbed(evalet);
     }
   } else if(message.content.startsWith(prefix + 'restart')) {
-    message.channel.send('Ayy');
+    exec("heroku restart");
+    message.channel.sendMessage(`Sucessfully restarting! ${message.author}`);
   }
-  };
+};
 
   if(userMod) {
     if (message.content.startsWith(prefix + 'help') || message.content.startsWith(mention + ' help')) {
@@ -530,7 +547,6 @@ if(message.guild.iconURL) {
       })
       .catch(console.error)
     };
-      break;
     };
 
   if(!userMod) {
