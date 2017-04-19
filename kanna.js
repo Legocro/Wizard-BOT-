@@ -558,7 +558,6 @@ if(message.guild.iconURL) {
 ///////////////BOT C////////////////
 client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C878jQ.hpOT-Bat3l5fS7nzxKPtAomRhvc");
 ////////////////////////////////////
-=======
 ////////////////////////////////////
 /*
    BOT DONE BY: Wizardλ#4559
