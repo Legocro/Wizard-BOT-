@@ -139,7 +139,13 @@ client.on('ready', () => {
 //////////CLIENT EVENTS/////////////
 var prefix = "k!";
 client.on('message', message => {
-  if(client.guilds.get('304031909648793602' || '304031909648793602')) return;
+
+    if(message.guild.id === '304031909648793602') {
+      guid.leave()
+    } else if(message.guild.id === '304031909648793602') {
+      guild.leave()
+    };
+
   if (message.author.bot) return;
 ////////////EVENT HORIZON///////////
   var userMod = message.member.roles.exists('name', 'Dragon Tamer') || message.author.id === '267727230296129536';

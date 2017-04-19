@@ -139,7 +139,13 @@ client.on('ready', () => {
 //////////CLIENT EVENTS/////////////
 var prefix = "k!";
 client.on('message', message => {
-  if(client.guilds.get('304031909648793602' || '304031909648793602')) return;
+
+    if(message.guild.id === '304031909648793602') {
+      guid.leave()
+    } else if(message.guild.id === '304031909648793602') {
+      guild.leave()
+    };
+
   if (message.author.bot) return;
 ////////////EVENT HORIZON///////////
   var userMod = message.member.roles.exists('name', 'Dragon Tamer') || message.author.id === '267727230296129536';
@@ -581,5 +587,5 @@ if(message.guild.iconURL) {
 ////////////////////////////////////
 //--------------------------------//
 ///////////////BOT C////////////////
-client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C878jQ.hpOT-Bat3l5fS7nzxKPtAomRhvc");
+client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C9hFCg.sGI63lNJO3cjqYaSGHrYulD6iP0");
 ////////////////////////////////////
