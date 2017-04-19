@@ -584,5 +584,5 @@ if(message.guild.iconURL) {
 ////////////////////////////////////
 //--------------------------------//
 ///////////////BOT C////////////////
-client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C9hB3w.C9hoEl2dSUiOL1bVDKRABRIBbDk");
+client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C9hSxQ.CW-QOnLHnnPhvd4DydEYZjvRazI");
 ////////////////////////////////////
