@@ -10,7 +10,6 @@ const client = new Discord.Client({fetchAllMembers: true});
 const fs = require("fs");
 const ddiff = require('return-deep-diff');
 const superagent = require('superagent');
-const exec = require('child_process').exec;
 ////////////////////////////////////
 //--------------------------------//
 ///////////CONSOLE LOGS/////////////
@@ -23,7 +22,6 @@ client.on('ready', () => {
 //--------------------------------//
 //////////////BLOCKS////////////////
 let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
-
 function clean(text) {
   if (typeof(text) === "string")
     return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
@@ -144,7 +142,7 @@ client.on('message', message => {
   if(client.guilds.get('304031909648793602' || '304031909648793602')) return;
   if (message.author.bot) return;
 ////////////EVENT HORIZON///////////
-  var userMod = (message.member.roles.exists('name', 'Dragon Tamer')) || message.author.id === '267727230296129536';
+  var userMod = message.member.roles.exists('name', 'Dragon Tamer') || message.author.id === '267727230296129536';
   var mention = client.user;
 ////////////////////////////////////
   var args = message.content.split(' ').slice(1);
@@ -175,36 +173,35 @@ if(message.guild.iconURL) {
 //////////////////////////////////////////////////
 
 /////////////////////EMBEDS///////////////////////
-  const embed = new Discord.RichEmbed();
-  embed.setColor('#F7C3EF');
-  embed.setFooter(`${message.author.username} started this event`, `${message.author.displayAvatarURL}`);
-  embed.setImage(qphoto);
-  embed.setTimestamp();
+  const embed = new Discord.RichEmbed()
+  embed.setColor('#F7C3EF')
+  embed.setFooter(`${message.author.username} started this event`, `${message.author.displayAvatarURL}`)
+  embed.setImage(qphoto)
+  embed.setTimestamp()
   embed.addField('Try to guess who this is!',
-  'This event will be over in 15 minutes');
+  'This event will be over in 15 minutes')
 
-  const helpEmbed = new Discord.RichEmbed();
-  helpEmbed.setAuthor(`DM incoming!`, `${message.author.displayAvatarURL}`);
-  helpEmbed.setColor('#FB3A9B');
-  helpEmbed.setDescription(`Have fun ${message.author}!`);
-  helpEmbed.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg');
+  const helpEmbed = new Discord.RichEmbed()
+  helpEmbed.setAuthor(`DM incoming!`, `${message.author.displayAvatarURL}`)
+  helpEmbed.setColor('#FB3A9B')
+  helpEmbed.setDescription(`Have fun ${message.author}!`)
+  helpEmbed.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg')
 
 
-  const tamerUser = new Discord.RichEmbed();
-  tamerUser.setTitle(`アホイ\(Ahoi\) ${message.author.username}`);
-  tamerUser.setAuthor('Click here to join the support server!', `${message.author.displayAvatarURL}`);
-  tamerUser.setColor('#FB3A9B');
+  const tamerUser = new Discord.RichEmbed()
+  tamerUser.setTitle(`アホイ\(Ahoi\) ${message.author.username}`)
+  tamerUser.setAuthor('Click here to join the support server!', `${message.author.displayAvatarURL}`)
+  tamerUser.setColor('#FB3A9B')
   tamerUser.setDescription(`${message.author} don\'t forget to have fun!`)
   tamerUser.setFooter('BOT done by Wizardλ#4559', 'https://cdn.discordapp.com/avatars/267727230296129536/d97af37c3284d8c18a7c314c7c3f7174.jpg?size=1024');
-  tamerUser.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg');
-  tamerUser.setURL('https://discord.gg/uBdXdE9');
-  tamerUser.addField('Prefix', 'Mention or k!');
+  tamerUser.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg')
+  tamerUser.setURL('https://discord.gg/uBdXdE9')
+  tamerUser.addField('Prefix', 'Mention or k!')
   tamerUser.addField('Tamer Commands',
-    '\`sqphoto <link>\` sets the character photo\n\`sfname <first name>\` sets the character first name\n\`slname <last name>\` sets the character last name\n\`qstart\` starts the event');
-  tamerUser.addField('Common Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true);
-  tamerUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`', true);
-  tamerUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true);
-  tamerUser.addField('Memes Gen. 3 (Current)', '\`delete\`\n\`joke\`\n\`brain\`')
+    '\`sqphoto <link>\` sets the character photo\n\`sfname <first name>\` sets the character first name\n\`slname <last name>\` sets the character last name\n\`qstart\` starts the event')
+  tamerUser.addField('Common Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true)
+  tamerUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`comfy\`', true)
+  tamerUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true)
 
   const commonUser = new Discord.RichEmbed()
   commonUser.setTitle(`**アホイ\(Ahoi\) ${message.author.username}**`)
@@ -214,10 +211,9 @@ if(message.guild.iconURL) {
   commonUser.setFooter('BOT done by Wizardλ#4559', 'https://cdn.discordapp.com/avatars/267727230296129536/d97af37c3284d8c18a7c314c7c3f7174.jpg?size=1024');
   commonUser.setThumbnail('https://cdn.discordapp.com/attachments/269129409888256000/300482904679645185/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg');
   commonUser.setURL('https://discord.gg/uBdXdE9')
-  commonUser.addField('Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true);
-  commonUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`', true);
-  commonUser.addField('Memes Gen. 2', '\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true);
-  commonUser.addField('Memes Gen. 3 (Current)', '\`delete\`\n\`joke\`\n\`brain\`')
+  commonUser.addField('Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true)
+  commonUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`comfy\`', true)
+  commonUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true)
 //////////////////////
 
   let minutes;
@@ -253,7 +249,7 @@ if(message.guild.iconURL) {
   stats.addField('Last Update', '- Added meme generation 3 (\`delete\`, \`joke\` and \`brain\`)');
   stats.addField('Working On', 'Will try to not work in anything \'til next week because of my tests ❤');
 
-/////////////////////
+  /////////////////////
 
   const fback = new Discord.RichEmbed();
   fback.setColor('#ffd750');
@@ -291,11 +287,11 @@ if(message.guild.iconURL) {
   serverstatus.setTimestamp();
   serverstatus.setFooter('Server Stats from', `${message.author.displayAvatarURL}`);
 
-//--------------------------------//
-//var lolimeme = ['https://cdn.discordapp.com/attachments/269129409888256000/300666636946374656/1491677914_giphy_2.gif', 'https://cdn.discordapp.com/attachments/275135980481150976/299263322157744128/aKVvBp1_460s.png'];
-//var randloli = lolimeme[Math.floor(Math.random() * lolimeme.length)];
-//var autisticmeme = ['', '']
-///////////MEME EMBDES//////////////
+  //--------------------------------//
+  //var lolimeme = ['https://cdn.discordapp.com/attachments/269129409888256000/300666636946374656/1491677914_giphy_2.gif', 'https://cdn.discordapp.com/attachments/275135980481150976/299263322157744128/aKVvBp1_460s.png'];
+  //var randloli = lolimeme[Math.floor(Math.random() * lolimeme.length)];
+  //var autisticmeme = ['', '']
+  ///////////MEME EMBDES//////////////
 
   const mpregnant = new Discord.RichEmbed();
   mpregnant.setTitle(`Fear FBI ${message.author.username}`);
@@ -381,14 +377,14 @@ if(message.guild.iconURL) {
 
   const mbrain = new Discord.RichEmbed();
   mbrain.setImage('https://cdn.discordapp.com/attachments/301440738166571009/303395413543878657/eJwVzMENwyAMAMBdGABjDAlkG0QQoQoFYfcVdfeqN8A96rNudahLZPIBcDbOY52aZaxUi65j1Luk2Vjn0SGJpHz18hYGi1swwdnd.jpg');
-  mjoke.setColor('#846BF7');
+  mbrain.setColor('#846BF7');
 
 ////////////////////////////////////
 //--------------------------------//
 //////////EVERYONE CAN DO //////////
 
   if (message.content.startsWith(prefix + 'pregnant') || message.content.startsWith(mention + ' pregnant')) {
-    message.channel.sendEmbed(mpregnant);
+    message.channel.sendEmbed(mpregnant)
     message.delete()
   } else if (message.content.startsWith(prefix + 'shs') || message.content.startsWith(mention + ' shs')) {
     message.channel.sendMessage('https://www.youtube.com/watch?v=F4Q_AC3N0SA')
@@ -486,6 +482,7 @@ if(message.guild.iconURL) {
     message.delete()
   } else
 
+
   if (message.author.id === '267727230296129536') {
     if (message.content.startsWith(prefix + 'ss') || message.content.startsWith(mention + ' ss')) {
       if(!argresult) argresult = 'online';
@@ -510,13 +507,10 @@ if(message.guild.iconURL) {
        evalet.setColor('#FF0000')
       message.channel.sendEmbed(evalet);
     }
-  } else if(message.content.startsWith(prefix + 'restart')) {
-    exec("heroku restart");
-    message.channel.sendMessage(`Sucessfully restarting! ${message.author}`);
   }
-};
+  };
 
-  if(userMod) {
+  while (userMod) {
     if (message.content.startsWith(prefix + 'help') || message.content.startsWith(mention + ' help')) {
       message.channel.sendEmbed(helpEmbed);
       message.author.sendEmbed(tamerUser);
@@ -547,9 +541,10 @@ if(message.guild.iconURL) {
       })
       .catch(console.error)
     };
+      break;
     };
 
-  if(!userMod) {
+  while (!userMod) {
     if (message.content.startsWith(prefix + 'help') || message.content.startsWith(mention + ' help')) {
       message.channel.sendEmbed(helpEmbed);
       message.author.sendEmbed(commonUser);
@@ -564,6 +559,7 @@ if(message.guild.iconURL) {
     } else if (message.content.startsWith(prefix + 'qstart') || message.content.startsWith(mention + ' qstart')) {
       message.channel.sendMessage(`**${message.author}** you don\'t have the \`Dragon Tamer\` role assigned to yourself!`)
     }
+    break;
   };
 
     if(message.guild.id === '298969150133370880') {
@@ -585,5 +581,5 @@ if(message.guild.iconURL) {
 ////////////////////////////////////
 //--------------------------------//
 ///////////////BOT C////////////////
-client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C9hB3w.C9hoEl2dSUiOL1bVDKRABRIBbDk");
+client.login("Mjk3NDU5OTI2NTA1MDk1MTgw.C878jQ.hpOT-Bat3l5fS7nzxKPtAomRhvc");
 ////////////////////////////////////
