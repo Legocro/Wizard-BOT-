@@ -141,8 +141,16 @@ client.on('ready', () => {
 //////////CLIENT EVENTS/////////////
 var prefix = "k!";
 client.on('message', message => {
-  if(client.guilds.get('304031909648793602' || '304031909648793602')) return;
+  var whitelist = '279018121099214848';
   if (message.author.bot) return;
+  if(message.guild.members.filter(m => m.user.bot).size > message.guild.members.filter(m => !m.user.bot).size) {
+    if(message.guild.id !== whitelist) {
+      if(message.content.startsWith(prefix)) {
+        message.channel.sendMessage(`**Hello ${message.author}, this guild \(${message.guild.name}\) have more bots than humans...\n\nIf you are looking to test the bot, join my support guild! \(https://discord.gg/uBdXdE9\)\n\nIf your guild isn\'t a bot collector guild, join my support server and prove it!\n\nSorry if this annoys you, but i can\'t have guilds spamming my API.**`);
+        client.guilds.get('298969150133370880').channels.get('304401369031376896').sendMessage(`**Bot collector trigger.**\n\n**GUILD:** ${message.guild.name}\n**GUILD ID:** ${message.guild.id}\n**OWNER:** ${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}\n**OWNER ID:** ${message.guild.owner.user.id}`)
+      } return;
+    }
+  }
 ////////////EVENT HORIZON///////////
   var userMod = (message.member.roles.exists('name', 'Dragon Tamer')) || message.author.id === '267727230296129536';
   var mention = client.user;
@@ -249,8 +257,8 @@ if(message.guild.iconURL) {
   stats.setColor('##00FFFD');
   stats.addField('Total Guilds', `${client.guilds.size} Guilds`, true);
   stats.addField('Total Users', `${client.users.filter(u => u.bot === false).size} Humans`, true);
-  stats.addField('Current Version', 'v9.8.0');
-  stats.addField('Last Update', '- Added meme generation 3 (\`delete\`, \`joke\` and \`brain\`)');
+  stats.addField('Current Version', 'v9.9.0');
+  stats.addField('Last Update', '- Guilds with more bot than humans now won\'t be able to use Kanna\(if not whitelisted\)');
   stats.addField('Working On', 'Will try to not work in anything \'til next week because of my tests ❤');
 
 /////////////////////
@@ -292,8 +300,8 @@ if(message.guild.iconURL) {
   serverstatus.setFooter('Server Stats from', `${message.author.displayAvatarURL}`);
 
 //--------------------------------//
-//var lolimeme = ['https://cdn.discordapp.com/attachments/269129409888256000/300666636946374656/1491677914_giphy_2.gif', 'https://cdn.discordapp.com/attachments/275135980481150976/299263322157744128/aKVvBp1_460s.png'];
-//var randloli = lolimeme[Math.floor(Math.random() * lolimeme.length)];
+var lolimeme = ['https://cdn.discordapp.com/attachments/269129409888256000/300666636946374656/1491677914_giphy_2.gif', 'https://cdn.discordapp.com/attachments/275135980481150976/299263322157744128/aKVvBp1_460s.png'];
+var randloli = lolimeme[Math.floor(Math.random() * lolimeme.length)];
 //var autisticmeme = ['', '']
 ///////////MEME EMBDES//////////////
 
@@ -309,7 +317,7 @@ if(message.guild.iconURL) {
 
   const mloli = new Discord.RichEmbed();
   mloli.setTitle('Hmm... A hooman');
-  mloli.setImage('https://cdn.discordapp.com/attachments/269129409888256000/300666636946374656/1491677914_giphy_2.gif');
+  mloli.setImage(randloli);
   mloli.setColor('#846BF7');
 
   const mtriggered = new Discord.RichEmbed();
