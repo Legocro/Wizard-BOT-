@@ -200,7 +200,7 @@ bkanna.on('guildCreate', guild => {
            tamerUser.addField('Common Commands', '\`ping\` see how long the bot takes to answer commands\n\`invite\` gets the bot link invite\n\`about\` a bit about **Kanna Kobayashi** and how to set it up\n\`feedback\` sends a feedback to the overlord\n\`request\` request a new feature to Kanna\n\`bstats\` see the bot current stats\n\`gstats\` see the guild stats', true);
            tamerUser.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`', true);
            tamerUser.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true);
-           tamerUser.addField('Memes Gen. 3 (Current)', '\`delete\`\n\`joke\`\n\`brain\`')
+           tamerUser.addField('Memes Gen. 3 (Current)', '\`delete\`\n\`joke\`\n\`brain\`\n\`cancer\`\n\`wtf\`\n\`100\`\n\`ticc\`\n\`laid\`\n\`flat\`\n\`pussy\`\n\`911\`\n\`dis\`\n\`kawaii\`\n\`ernie\`\n\`capit\`\n\`4ever\`\n\`scream\`\n\`jojoke\`')
 
            commonUser.setTitle(`**アホイ\(Ahoi\) ${msg.author.username}**`)
            commonUser.setAuthor('Click here to join the support server!', `${msg.author.displayAvatarURL}`)
