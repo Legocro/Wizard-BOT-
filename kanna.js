@@ -3,11 +3,16 @@ const bkanna = new Discord.Client({fetchAllMembers: true});
 const fs = require("fs");
 const superagent = require('superagent');
 const exec = require('child_process').exec;
-const cfg = require('./config.js');
+//const cfg = require('./config.js');
 
 let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
 let guildIcon;
 let roleNames;
+var prefix = "k!";
+var whitelist = "279018121099214848";
+var owner = "267727230296129536"
+var token = "Mjk3NDU5OTI2NTA1MDk1MTgw.C9riqg.Jp21D6KKsc9v-zg-rUR_eNChSVw"
+
 
 bkanna.on('ready', () => {
   console.log('Ayy lmao, this is v10');
@@ -116,8 +121,8 @@ bkanna.on('guildCreate', guild => {
 
      bkanna.on('message', msg => {
        if (msg.author.bot) return;
-       if(msg.content.startsWith(cfg.prefix)) {
-         if(msg.guild.members.filter(m => !m.user.bot).size < msg.guild.members.filter(m => m.user.bot).size && msg.guild.id !== cfg.whitelist) {
+       if(msg.content.startsWith(prefix)) {
+         if(msg.guild.members.filter(m => !m.user.bot).size < msg.guild.members.filter(m => m.user.bot).size && msg.guild.id !== whitelist) {
            msg.channel.sendMessage(`**Hey ${msg.member}, this guild haves more Humans than Bots \(${msg.guild.members.filter(m => !m.user.bot).size} Humans and ${msg.guild.members.filter(m => m.user.bot).size} Bots\)\nIf you want to test the bot please join the support server! \(https://discord.gg/uBdXdE9\)\n\nSorry if this bothers you, but i can\'t let bot collectors spam my API**`);
            return;
          } else {
@@ -225,7 +230,7 @@ bkanna.on('guildCreate', guild => {
            fback.setFooter('Received', `${msg.author.displayAvatarURL}`);
            fback.setTitle(`New feedback`);
            fback.setDescription(`${bkanna.guilds.get('298969150133370880').roles.find('name', 'Support')} check this!`);
-           fback.addField('User Feedback', `${msg.content.split(cfg.prefix + 'feedback').slice(1).join(" ")}`);
+           fback.addField('User Feedback', `${msg.content.split(prefix + 'feedback').slice(1).join(" ")}`);
            fback.addField('Informations', `**Username:** ${msg.author}\n**User ID:** ${msg.author.id}\n**Guild Name:** ${msg.guild.name}\n**Guild ID:** ${msg.guild.id}\n**Message ID:** ${msg.id}`);
 
            request.setColor('#322254');
@@ -233,7 +238,7 @@ bkanna.on('guildCreate', guild => {
            request.setFooter('Received', `${msg.author.displayAvatarURL}`);
            request.setTitle(`New request`);
            request.setDescription(`${bkanna.guilds.get('298969150133370880').roles.find('name', 'Support')} check this!`);
-           request.addField('User Request', `${msg.content.split(cfg.prefix + 'request').slice(1).join(" ")}`);
+           request.addField('User Request', `${msg.content.split(prefix + 'request').slice(1).join(" ")}`);
            request.addField('Informations', `**Username:** ${msg.author}\n**User ID:** ${msg.author.id}\n**Guild Name:** ${msg.guild.name}\n**Guild ID:** ${msg.guild.id}\n**Message ID:** ${msg.id}`);
 
            serverstatus.setThumbnail(guildIcon);
@@ -406,19 +411,19 @@ bkanna.on('guildCreate', guild => {
            mcancer.setColor('#846BF7');
 
           try {
-           if (msg.content.startsWith(cfg.prefix + 'pregnant')) {
+           if (msg.content.startsWith(prefix + 'pregnant')) {
              msg.channel.sendEmbed(mpregnant);
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'shs')) {
+           } else if (msg.content.startsWith(prefix + 'shs')) {
              msg.channel.sendmsg('https://www.youtube.com/watch?v=F4Q_AC3N0SA')
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'comfy')) {
+           } else if (msg.content.startsWith(prefix + 'comfy')) {
              msg.channel.sendmsg('https://www.youtube.com/watch?v=ZyYaSvWikPQ')
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'lewd')) {
+           } else if (msg.content.startsWith(prefix + 'lewd')) {
              msg.channel.sendmsg('https://streamable.com/npvut');
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'hungry')) {
+           } else if (msg.content.startsWith(prefix + 'hungry')) {
              msg.channel.sendEmbed(mhungry)
              .then(() => {
                msg.channel.awaitMessages(response => response.content.startsWith('yes'), {
@@ -431,139 +436,139 @@ bkanna.on('guildCreate', guild => {
                })
              })
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'triggered')) {
+           } else if (msg.content.startsWith(prefix + 'triggered')) {
              msg.channel.sendEmbed(mtriggered)
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'endme')) {
+           } else if (msg.content.startsWith(prefix + 'endme')) {
              msg.channel.sendEmbed(mendme)
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'loli')) {
+           } else if (msg.content.startsWith(prefix + 'loli')) {
              msg.channel.sendEmbed(mloli)
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'dab')) {
+           } else if (msg.content.startsWith(prefix + 'dab')) {
              msg.channel.sendEmbed(mdab)
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'drunk')) {
+           } else if (msg.content.startsWith(prefix + 'drunk')) {
              msg.channel.sendEmbed(mdunk)
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'police')) {
+           } else if (msg.content.startsWith(prefix + 'police')) {
              msg.channel.sendEmbed(mpolice)
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'doit')) {
+           } else if (msg.content.startsWith(prefix + 'doit')) {
              msg.channel.sendEmbed(mdoit)
              msg.delete()
-           } else if(msg.content.startsWith(cfg.prefix + 'dance')) {
+           } else if(msg.content.startsWith(prefix + 'dance')) {
              msg.channel.sendEmbed(mdance)
              msg.delete()
-           } else if(msg.content.startsWith(cfg.prefix + 'rain')) {
+           } else if(msg.content.startsWith(prefix + 'rain')) {
              msg.channel.sendEmbed(mrain)
              msg.delete()
-           } else if(msg.content.startsWith(cfg.prefix + 'purge')) {
+           } else if(msg.content.startsWith(prefix + 'purge')) {
              msg.channel.sendEmbed(mpurge)
              msg.delete()
-           } else if(msg.content.startsWith(cfg.prefix + 'ten')) {
+           } else if(msg.content.startsWith(prefix + 'ten')) {
              msg.channel.sendEmbed(mten)
              msg.delete()
-           } else if(msg.content.startsWith(cfg.prefix + 'sheet')) {
+           } else if(msg.content.startsWith(prefix + 'sheet')) {
              msg.channel.sendEmbed(msheet)
              msg.delete()
-           } else if(msg.content.startsWith(cfg.prefix + 'listen')) {
+           } else if(msg.content.startsWith(prefix + 'listen')) {
              msg.channel.sendEmbed(mlisten)
              msg.delete()
-           } else if(msg.content.startsWith(cfg.prefix + 'friends')) {
+           } else if(msg.content.startsWith(prefix + 'friends')) {
              msg.channel.sendEmbed(mfriends)
              msg.delete()
-           } else if(msg.content.startsWith(cfg.prefix + 'autist')) {
+           } else if(msg.content.startsWith(prefix + 'autist')) {
              msg.channel.sendEmbed(mautist)
              msg.delete()
-           } else if (msg.content.startsWith(cfg.prefix + 'ping')) {
+           } else if (msg.content.startsWith(prefix + 'ping')) {
              return msg.channel.sendMessage('Eating insects...').then(message => {
                message.edit(`I took \`${message.createdTimestamp - msg.createdTimestamp} ms\` to eat all of them!`);
              });
-           } else if (msg.content.startsWith(cfg.prefix + 'about')) {
+           } else if (msg.content.startsWith(prefix + 'about')) {
              msg.channel.sendmsg(`**こんにちは(Kon'nichiwa) ${msg.author}**\n\nI am **カンナカムイ\(Kanna Kamui\)** i live with Kobayashi-san... So call me **Kanna Kobayashi**!\n\nWell, i am at **Discord** to spread the love for anime and quiz!\nFirst of all, you need to assign to yourself a role called \"Dragon Tamer\"\nAfter you can do \`k!qstart\` to test if everything is good!\n\nTo set up a different character you have to do \`k!sfname <first name>\` to set the character first name, \`k!slname <last name>\` to set up the character last name and \`k!sqphoto <link>\` to set up the character photo, then just do \`k!qstart\`!\n\n**Join my support server if you have any questions!**\nhttps://discord.gg/uBdXdE9`)
-           } else if (msg.content.startsWith(cfg.prefix + 'invite')) {
+           } else if (msg.content.startsWith(prefix + 'invite')) {
              msg.channel.sendMessage(`Invite me to your server ${msg.author}!\nhttps://discordapp.com/oauth2/authorize?permissions=1341643977&scope=bot&client_id=297459926505095180`)
-           } else if (msg.content.startsWith(cfg.prefix + 'feedback')) {
+           } else if (msg.content.startsWith(prefix + 'feedback')) {
              bkanna.guilds.get('298969150133370880').channels.get('302982607182888961').sendEmbed(fback)
              msg.channel.sendMessage(`A feedback has been sent to the overlords!`)
-           } else if (msg.content.startsWith(cfg.prefix + 'request')) {
+           } else if (msg.content.startsWith(prefix + 'request')) {
              bkanna.guilds.get('298969150133370880').channels.get('299632702087495680').sendEmbed(request)
              msg.channel.sendMessage(`A request has been sent to the overlords!`)
-           } else if (msg.content.startsWith(cfg.prefix + 'bstats')) {
+           } else if (msg.content.startsWith(prefix + 'bstats')) {
              msg.channel.sendEmbed(stats)
-           } else if (msg.content.startsWith(cfg.prefix + 'gstats')) {
+           } else if (msg.content.startsWith(prefix + 'gstats')) {
              msg.channel.sendEmbed(serverstatus)
-           } else if(msg.content.startsWith(cfg.prefix + 'brain')) {
+           } else if(msg.content.startsWith(prefix + 'brain')) {
              msg.channel.sendEmbed(mbrain);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'joke')) {
+           } else if(msg.content.startsWith(prefix + 'joke')) {
              msg.channel.sendEmbed(mjoke);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'delete')) {
+           } else if(msg.content.startsWith(prefix + 'delete')) {
              msg.channel.sendEmbed(mdelete);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'jojoke')) {
+           } else if(msg.content.startsWith(prefix + 'jojoke')) {
              msg.channel.sendEmbed(mjojoke);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'scream')) {
+           } else if(msg.content.startsWith(prefix + 'scream')) {
              msg.channel.sendEmbed(mscream);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + '4ever')) {
+           } else if(msg.content.startsWith(prefix + '4ever')) {
              msg.channel.sendEmbed(mforever);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'capit')) {
+           } else if(msg.content.startsWith(prefix + 'capit')) {
              msg.channel.sendEmbed(mcapitalism);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'ernie')) {
+           } else if(msg.content.startsWith(prefix + 'ernie')) {
              msg.channel.sendEmbed(mernie);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'kawaii')) {
+           } else if(msg.content.startsWith(prefix + 'kawaii')) {
              msg.channel.sendEmbed(mkawaii);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'dis')) {
+           } else if(msg.content.startsWith(prefix + 'dis')) {
              msg.channel.sendEmbed(mthis);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + '911')) {
+           } else if(msg.content.startsWith(prefix + '911')) {
              msg.channel.sendEmbed(m911);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'pussy')) {
+           } else if(msg.content.startsWith(prefix + 'pussy')) {
              msg.channel.sendEmbed(mpussy);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'flat')) {
+           } else if(msg.content.startsWith(prefix + 'flat')) {
              msg.channel.sendEmbed(mflat);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'laid')) {
+           } else if(msg.content.startsWith(prefix + 'laid')) {
              msg.channel.sendEmbed(mlaid);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'ticc')) {
+           } else if(msg.content.startsWith(prefix + 'ticc')) {
              msg.channel.sendEmbed(mticc);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + '100')) {
+           } else if(msg.content.startsWith(prefix + '100')) {
              msg.channel.sendEmbed(m100);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'wtf')) {
+           } else if(msg.content.startsWith(prefix + 'wtf')) {
              msg.channel.sendEmbed(mwtf);
              msg.delete();
-           } else if(msg.content.startsWith(cfg.prefix + 'cancer')) {
+           } else if(msg.content.startsWith(prefix + 'cancer')) {
              msg.channel.sendEmbed(mcancer);
            };
          }catch (err) {
              msg.channel.sendMessage(`This shouldn\'t happen! Report this to the support guild:\n\`\`\`js\n${err}\`\`\``)
          };
 
-           if (msg.author.id === cfg.owner) {
-             if (msg.content.startsWith(cfg.prefix + 'ss')) {
+           if (msg.author.id === owner) {
+             if (msg.content.startsWith(prefix + 'ss')) {
                if(!argresult) {
                  argresult = 'online';
                };
                bkanna.user.setStatus(argresult);
-             } else if (msg.content.startsWith(cfg.prefix + "eval")) {
+             } else if (msg.content.startsWith(prefix + "eval")) {
              try {
                var code = args.join(" ");
                var evaled = eval(code);
                const evale = new Discord.RichEmbed()
-               evale.addField('Input', `${msg.content.split(cfg.prefix + 'eval').slice(1)}`)
+               evale.addField('Input', `${msg.content.split(prefix + 'eval').slice(1)}`)
                evale.addField('Output', `${clean(evaled)}`)
                evale.setColor('#ffc0cb')
 
@@ -573,32 +578,32 @@ bkanna.on('guildCreate', guild => {
                msg.channel.sendEmbed(evale);
              } catch (err) {
                 const evalet = new Discord.RichEmbed()
-                evalet.addField('Input', `${msg.content.split(cfg.prefix + 'eval').slice(1)}`)
+                evalet.addField('Input', `${msg.content.split(prefix + 'eval').slice(1)}`)
                 evalet.addField('Error', `${clean(err)}`)
                 evalet.setColor('#800080')
                msg.channel.sendEmbed(evalet);
              }
            }
          } else {
-           if(message.content.startsWith(cfg.prefix + 'ss') || message.content.startsWith(cfg.prefix + 'eval')) {
+           if(message.content.startsWith(prefix + 'ss') || message.content.startsWith(prefix + 'eval')) {
              msg.channel.sendMessage('Only the owner can do this command!')
            };
          };
 
-         if(msg.member.roles.exists('name', 'Dragon Tamer') || msg.member.id === cfg.owner) {
-           if (msg.content.startsWith(cfg.prefix + 'help')) {
+         if(msg.member.roles.exists('name', 'Dragon Tamer') || msg.member.id === owner) {
+           if (msg.content.startsWith(prefix + 'help')) {
              msg.channel.sendEmbed(helpEmbed);
              msg.author.sendEmbed(tamerUser);
-           } else if (msg.content.startsWith(cfg.prefix + 'sfname')) {
+           } else if (msg.content.startsWith(prefix + 'sfname')) {
              msg.channel.sendMessage(`The first name has changed sucessfully ${msg.author}`)
-             names[msg.guild.id].firstName = msg.content.split(cfg.prefix + 'sfname ').slice(1).join('');
-           } else if (msg.content.startsWith(cfg.prefix + 'slname')) {
+             names[msg.guild.id].firstName = msg.content.split(prefix + 'sfname ').slice(1).join('');
+           } else if (msg.content.startsWith(prefix + 'slname')) {
              msg.channel.sendMessage(`The last name has changed sucessfully ${msg.author}`);
-             names[msg.guild.id].lastName = msg.content.split(cfg.prefix + 'slname ').slice(1).join('');
-           } else if (msg.content.startsWith(cfg.prefix + 'sqphoto')) {
+             names[msg.guild.id].lastName = msg.content.split(prefix + 'slname ').slice(1).join('');
+           } else if (msg.content.startsWith(prefix + 'sqphoto')) {
              msg.channel.sendMessage(`The quiz photo has changed sucessfully ${msg.author}`);
-             names[msg.guild.id].quizPhoto = msg.content.split(cfg.prefix + 'sqphoto').slice(1).join('');
-           } else if (msg.content.startsWith(cfg.prefix + 'qstart')) {
+             names[msg.guild.id].quizPhoto = msg.content.split(prefix + 'sqphoto').slice(1).join('');
+           } else if (msg.content.startsWith(prefix + 'qstart')) {
              msg.channel.sendEmbed(quizemb)
              msg.delete()
              .then(() => {
@@ -617,16 +622,16 @@ bkanna.on('guildCreate', guild => {
              .catch(console.error)
            };
          } else {
-           if (msg.content.startsWith(cfg.prefix + 'help')) {
+           if (msg.content.startsWith(prefix + 'help')) {
              msg.channel.sendEmbed(helpEmbed);
              msg.author.sendEmbed(commonUser);
-           } else if (msg.content.startsWith(cfg.prefix + 'sfname')) {
+           } else if (msg.content.startsWith(prefix + 'sfname')) {
              msg.channel.sendMessage(`**${msg.author}** you don\'t have the \`Dragon Tamer\` role assigned to yourself!`)
-           } else if (msg.content.startsWith(cfg.prefix + 'slname')) {
+           } else if (msg.content.startsWith(prefix + 'slname')) {
              msg.channel.sendMessage(`**${msg.author}** you don\'t have the \`Dragon Tamer\` role assigned to yourself!`)
-           } else if (msg.content.startsWith(cfg.prefix + 'sqphoto')) {
+           } else if (msg.content.startsWith(prefix + 'sqphoto')) {
              msg.channel.sendMessage(`**${msg.author}** you don\'t have the \`Dragon Tamer\` role assigned to yourself!`)
-           } else if (msg.content.startsWith(cfg.prefix + 'qstart')) {
+           } else if (msg.content.startsWith(prefix + 'qstart')) {
              msg.channel.sendMessage(`**${msg.author}** you don\'t have the \`Dragon Tamer\` role assigned to yourself!`)
            }
          };
@@ -649,4 +654,4 @@ bkanna.on('guildCreate', guild => {
        } else return;
      });
 
-     bkanna.login(cfg.token);
+     bkanna.login(token);
