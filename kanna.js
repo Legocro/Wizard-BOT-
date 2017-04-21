@@ -43,7 +43,6 @@ bkanna.on('guildCreate', guild => {
   fs.writeFile('./names.json', JSON.stringify(names), (err) => {
     if (err) console.error(err)
   });
-    bkanna.user.setGame(`k!help on ${bkanna.guilds.size} guilds`);
   superagent
       .post(`https://bots.discord.pw/api/bots/${bkanna.user.id}/stats`)
       .set("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIyNjc3MjcyMzAyOTYxMjk1MzYiLCJyYW5kIjo2MDUsImlhdCI6MTQ5MTkyMzU0Mn0.70Ihb6mfLmzZz0MiyRYFaqJk7M4ubRL0aGIR32qAKF0")
@@ -78,7 +77,8 @@ bkanna.on('guildCreate', guild => {
        gcreate.addField('Total Roles', `${guild.roles.size}`, true)
        gcreate.addField('Role Names', roleNames, true)
        bkanna.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gcreate)
-       bkanna.users.get('267727230296129536').send(`**I joined a guild and i am now on \`${bkanna.guilds.size}\` guilds!**`)
+       bkanna.users.get('267727230296129536').send(`**I joined a guild and i am now on \`${bkanna.guilds.size}\` guilds!**`);
+       bkanna.user.setGame(`k!help on ${bkanna.guilds.size} guilds`);
      });
 
      bkanna.on('guildDelete', guild => {
@@ -585,7 +585,7 @@ bkanna.on('guildCreate', guild => {
              }
            }
          } else {
-           if(message.content.startsWith(prefix + 'ss') || message.content.startsWith(prefix + 'eval')) {
+           if(msg.content.startsWith(prefix + 'ss') || msg.content.startsWith(prefix + 'eval')) {
              msg.channel.sendMessage('Only the owner can do this command!')
            };
          };
