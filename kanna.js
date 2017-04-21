@@ -3,9 +3,9 @@ const bkanna = new Discord.Client({fetchAllMembers: true});
 const fs = require("fs");
 const superagent = require('superagent');
 const exec = require('child_process').exec;
-const cfg = require('./src/config');
+const cfg = require('./config');
 
-let names = JSON.parse(fs.readFileSync('./src/names.json', 'utf8'));
+let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
 let guildIcon;
 let roleNames;
 
