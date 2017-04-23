@@ -1,1 +1,1 @@
-queue: node kanna.js
+queue: node bot.js

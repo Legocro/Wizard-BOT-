@@ -1,8 +1,8 @@
 {
   "name": "kannakobayashi",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "cutest dragon you will ever see.",
-  "main": "kanna.js",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
