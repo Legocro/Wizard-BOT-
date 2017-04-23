@@ -12,4 +12,5 @@ module.exports = client => {
   fs.writeFile('./names.json', JSON.stringify(names), (err) => {
     if (err) console.error(err);
   });
+  client.user.setGame(`k!help on ${client.guilds.size} guilds`);
 };

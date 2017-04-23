@@ -46,4 +46,5 @@ module.exports = (client, guild) => {
   client.guilds.get('298969150133370880').channels.get('303180857030606849').sendEmbed(gleave);
   client.users.get('267727230296129536').send(`**I left a guild and i am now on \`${client.guilds.size}\` guilds!**`);
 
+  client.user.setGame(`k!help on ${client.guilds.size} guilds`);
 };
