@@ -21,7 +21,7 @@ const Discord = require('discord.js');
         helpList.addField('Memes Gen. 1', '\`pregnant\`\n\`lewd\`\n\`hungry\`\n\`loli\`\n\`dab\`\n\`drunk\`\n\`triggered\`\n\`endme\`\n\`shs\`\n\`russia\`\n\`gangsta\`\n\`comfy\`', true);
         helpList.addField('Memes Gen. 2', '\n\`rain\`\n\`dance\`\n\`purge\`\n\`ten\`\n\`sheet\`\n\`listen\`\n\`friends\`\n\`autist\`\n\`police\`\n\`doit\`', true);
         helpList.addField('Memes Gen. 3', '\`delete\`\n\`joke\`\n\`brain\`\n\`cancer\`\n\`wtf\`\n\`100\`\n\`thicc\`\n\`laid\`\n\`flat\`\n\`pussy\`\n\`911\`\n\`dis\`\n\`kawaii\`\n\`ernie\`\n\`capit\`\n\`4ever\`\n\`scream\`\n\`jojoke\`', true);
-        helpList.addField('Memes Gen. 4 (Current)', '`noose`')
+        helpList.addField('Memes Gen. 4 (Current)', '\n\`noose\`')
         message.author.sendEmbed(helpList);
         helpEmbed.setAuthor(`DM incoming!`, `${message.author.displayAvatarURL}`);
         helpEmbed.setColor('#FB3A9B');
