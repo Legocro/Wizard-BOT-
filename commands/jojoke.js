@@ -8,7 +8,7 @@ exports.run = function(client, message, args) {
     mjojoke.setImage(rjojokes);
     mjojoke.setColor('#846BF7');
 
-
+  message.channel.sendEmbed(mjojoke)
   }catch(err) {
   message.channel.sendMessage(`This should not have happend! Report this to the official server\n\`\`\`js\n${err.stack}\n\`\`\``);
   }
