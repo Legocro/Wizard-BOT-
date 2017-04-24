@@ -56,7 +56,7 @@ client.elevation = message => {
   let permlvl = 0;
   let mod_role = message.guild.roles.find('name', settings.modrolename);
   if (mod_role && message.member.roles.has(mod_role.id)) permlvl = 2;
-  if (message.author.id === settings.owners) permlvl = 3;
+  if (message.author.id === settings.owners[0] || message.author.id === settings.owners[1]) permlvl = 3;
   return permlvl;
 };
 
@@ -67,5 +67,6 @@ client.on('warn', e => {
 client.on('error', e => {
   console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
 });
+
 
 client.login(settings.token);

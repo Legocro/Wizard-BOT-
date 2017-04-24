@@ -18,14 +18,14 @@ try{
                if (typeof evaled !== "string")
                  evaled = require("util").inspect(evaled);
                  const evale = new Discord.RichEmbed();
-                 evale.addField('Input', `${message.content.split(' ').slice(1)}`);
+                 evale.addField('Input', `${message.content.split(' ').slice(1).join(' ')}`);
                  evale.addField('Output', `${clean(evaled)}`);
                  evale.setColor('#ffc0cb');
 
                message.channel.sendEmbed(evale);
            } catch (err) {
              const evalet = new Discord.RichEmbed();
-             evalet.addField('Input', `${message.content.split(' ').slice(1)}`);
+             evalet.addField('Input', `${message.content.split(' ').slice(1).join(' ')}`);
              evalet.addField('Error', `${clean(err)}`);
              evalet.setColor('#800080');
 
