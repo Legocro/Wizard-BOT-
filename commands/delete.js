@@ -15,13 +15,13 @@ exports.run = function(client, message, args) {
   exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: [''],
+    aliases: ['dlt'],
     permLevel: 0
   };
 
   exports.help = {
-    hName: '',
-    name: '',
+    hName: 'Delete Meme',
+    name: 'delete',
     description: 'Meme',
-    usage: ''
+    usage: 'delete'
   };
