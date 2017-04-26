@@ -1,7 +1,7 @@
 exports.run = function(client, message, args) {
   try{
     if(message.guild.id === '298969150133370880') {
-    message.channel.sendMessage(`Hello ${message.author}, choose one of these roles to be assigned to you:\n\n\`\[1\]\` Kanna Fan \> Show to everyone you are fan of Kanna!\n\`\[2\]\` Beta Tester \> Test upcoming updates for `)
+    message.channel.sendMessage(`Hello ${message.author}, choose one of these roles to be assigned to you:\n\n\`\[1\]\` \| Kanna Fan \> Show to everyone you are fan of Kanna!\n\`\[2\]\`  Beta Tester \> Test upcoming updates for `)
     .then(() => {
       message.channel.awaitMessages(response => response.author === message.author && (response.content === '1' || response.content === '2'), {
         max: 1,
