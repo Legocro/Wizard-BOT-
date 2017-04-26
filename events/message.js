@@ -9,9 +9,7 @@ module.exports = message => {
     message.channel.sendMessage('This guild haves more bots than humans! I won\'t answer any commands from bot collectors >;(\n\nIf you aren\'t a bot collector and want to be whitelisted join  the official guild and ping the support (@Support)\nhttps://discord.gg/uBdXdE9');
     return;
   } 
-  
   if (message.channel.type === 'dm') return;
-  if (!message.content.startsWith(settings.prefix)) return;
   let command = message.content.split(' ')[0].slice(settings.prefix.length);
   let params = message.content.split(' ').slice(1);
   let perms = client.elevation(message);
