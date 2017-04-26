@@ -3,6 +3,7 @@ const fs = require("fs");
 
 module.exports = message => {
   let client = message.client;
+  if(!message.content.startsWith(settings.prefix)) return;
   if (message.author.bot) return;
   if(message.guild.members.filter(m => m.user.bot).size > message.guild.members.filter(m => !m.user.bot).size) {
     message.channel.sendMessage('This guild haves more bots than humans! I won\'t answer any commands from bot collectors >;(');
