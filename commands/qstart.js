@@ -32,7 +32,7 @@ exports.run = function(client, message, args) {
       message.channel.sendMessage('**No one guessed it right! So the event has ended!**');
     });
   })
-  .catch (client.users.get(settings.owners[0]).send(`\`\`\`js\n${error}`));
+  .catch (client.users.get(settings.owners[0]).send(`\`\`\`js\n${err}`));
   fs.writeFile('./names.json', JSON.stringify(names), (err) => {		
     if (err) console.error(err);		
  });
