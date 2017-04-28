@@ -35,7 +35,7 @@ exports.run = function(client, message, args) {
   .catch (client.users.get(settings.owners[0]).send(`\`\`\`js\n${error}`));
   fs.writeFile('./names.json', JSON.stringify(names), (err) => {		
     if (err) console.error(err);		
- -});
+ });
 }catch(err) {
 message.channel.sendMessage(`This should not have happend! Report this to the official server\n\`\`\`js\n${err.stack}\n\`\`\``);
 }
