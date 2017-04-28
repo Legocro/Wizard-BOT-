@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 
 exports.run = function(client, message, args) {
   try{
-  let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
+  let names = JSON.parse(fs.readFileSync('../names.json', 'utf8'));
   const quizemb = new Discord.RichEmbed();
   let firstname = names[message.guild.id].firstName;
   let lastname = names[message.guild.id].lastName;
