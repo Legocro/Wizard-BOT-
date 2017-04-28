@@ -17,7 +17,7 @@ exports.run = function(client, message, args) {
   quizemb.addField('Try to guess who this is!',
   'This event will be over in 15 minutes');
 
-  message.channel.sendEmbed(quizemb); 
+  message.channel.sendEmbed(quizemb)
   .then(() => {
     message.channel.awaitMessages(response => response.content.startsWith(firstname) || response.content === lastname || response.content === lastname.toLowerCase() || response.content.startsWith(firstname.toLowerCase()) || response.content.startsWith(lastname), {
       max: 1,
