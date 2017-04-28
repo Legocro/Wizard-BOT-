@@ -5,7 +5,7 @@ module.exports = message => {
   let client = message.client;
   if(!message.content.startsWith(settings.prefix)) return;
   if (message.author.bot) return;
-  if(message.guild.members.filter(m => m.user.bot).size > message.guild.members.filter(m => !m.user.bot).size && !settings.whitelist.includes(message.guild.id)) {
+  if(message.guild.members.filter(m => m.user.bot).size > message.guild.members.filter(m => !m.user.bot).size && !settings.whitelist.includes(message.guild.id) && message.guild.members.size > 50) {
     message.channel.sendMessage('This guild haves more bots than humans! I won\'t answer any commands >;(\n\nIf you aren\'t a bot collector and want to be whitelisted join  the official guild and ping the support (@Support)\nhttps://discord.gg/uBdXdE9');
     return;
   } 
