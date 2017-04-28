@@ -25,8 +25,8 @@ if ((client.uptime / 1000 % 60).toFixed() === 0) {
     stats.setColor('##00FFFD');
     stats.addField('Total Guilds', `${client.guilds.size} Guilds`, true);
     stats.addField('Total Users', `${client.users.filter(u => u.bot === false).size} Humans`, true);
-    stats.addField('Current Version', 'v11.3');
-    stats.addField('Last Update', '- Fixed delete command \n- Added again the unique official server command');
+    stats.addField('Current Version', 'v11.5');
+    stats.addField('Last Update', '- Fixed \`qstart\`\n- Minor fixes');
     stats.addField('Special Thanks', '- Mashiro#0948 for being a great friend, and pushing me foward with this project\n\n- Wolke#6746 the best discord dev i\'ve met so far\n\n- Kapparina#9425 for helping me a lot throught this update!\n\n- 🌌 ∫ Lewdcario dx 🐾#9378 for helping me with a huge ass problem\n\n- Vault-Girl#5560 for being the nicest support ever!\n\n- Discord.js official server for helping me through all this');
     stats.addField('Working On', 'Learning to be a better dev');
 
