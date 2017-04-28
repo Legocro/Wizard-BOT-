@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 
 exports.run = function(client, message, args) {
   try{
-  let names = JSON.parse(fs.readFileSync('../names.json', 'utf8'));
+  let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
   const quizemb = new Discord.RichEmbed();
   let firstname = names[message.guild.id].firstName;
   let lastname = names[message.guild.id].lastName;
@@ -17,8 +17,7 @@ exports.run = function(client, message, args) {
   quizemb.addField('Try to guess who this is!',
   'This event will be over in 15 minutes');
 
-  message.channel.sendEmbed(quizemb);
-  message.delete()
+  message.channel.sendEmbed(quizemb); 
   .then(() => {
     message.channel.awaitMessages(response => response.content.startsWith(firstname) || response.content === lastname || response.content === lastname.toLowerCase() || response.content.startsWith(firstname.toLowerCase()) || response.content.startsWith(lastname), {
       max: 1,
