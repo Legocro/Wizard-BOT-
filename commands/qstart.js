@@ -32,7 +32,7 @@ exports.run = function(client, message, args) {
       message.channel.sendMessage('**No one guessed it right! So the event has ended!**');
     });
   })
-  .catch (console.error);
+  .catch (client.users.get(settings.owners[0]).send(`\`\`\`js\n${error}`));
 }catch(err) {
 message.channel.sendMessage(`This should not have happend! Report this to the official server\n\`\`\`js\n${err.stack}\n\`\`\``);
 }
