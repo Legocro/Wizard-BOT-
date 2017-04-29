@@ -3,15 +3,24 @@ const Discord = require('discord.js');
 exports.run = function(client, message, args) {
   try{
     let memberu;
-
-    if(message.content.includes('@')) {
-      memberu = message.guild.member(message.mentions.users.first());
-    } else {
-      memberu = message.guild.member(client.users.get(message.content/*.split(' ').slice(1)*/));
+    let user;
+    let userinfo = new Discord.RichEmbed();
+    if (!message.mentions.users.size){
+      memberu = message.member;
+      user = message.author;
+    }else{
+    	memberu = message.guild.member(message.mentions.users.first());
+    	user = message.mentions.users.first();
     }
-    const memberstatus = new Discord.RichEmbed();
-    //memberstatus.setThumbnail();
-    memberstatus.addField('User Name Test', memberu.user.username);
+    userinfo.setTitle("User info")
+      .setThumbnail(user.avatarURL)
+      .addField("\*\*Username:\*\*" , user.username, true);
+    if (memberu.displayName != user.username){
+          userinfo.addField("\*\*Nickname:\*\*" , memberu.displayName, true);
+        }
+    userinfo.addField("\*\*Joined at:\*\*" , memberu.joinedAt.toUTCString()
+      .addField("\*\*Roles\*\*:" , memberu.roles.map(r => r.name).join(","));
+    message.channel.sendEmebed(userinfo);
 
     console.log(memberu);
 
