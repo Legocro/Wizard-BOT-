@@ -5,12 +5,12 @@ const fs = require("fs");
 let names = JSON.parse(fs.readFileSync('./names.json', 'utf8'));
 
 module.exports = (client, guild) => {
-  guild.defaultChannel.sendMessage(`**Thanks for adding me here! I hope __${guild.name}__ have loads of insects!\n\nDo \`k!about\` to know a bit about me!\n\nAlso you can see all commands with \`k!help\`!\n\nJoin my support server if you have any questions!\nhttps://discord.gg/uBdXdE9**`)
+  guild.defaultChannel.sendMessage(`**Thanks for adding me here! I hope __${guild.name}__ have loads of insects!\n\nDo \`k!about\` to know a bit about me!\n\nAlso you can see all commands with \`k!help\`!\n\nJoin my support server if you have any questions!\nhttps://discord.gg/uBdXdE9**`);
   names[guild.id] = {
     firstName: "Kanna",
     lastName: "Kobayashi",
-    quizPhoto: "http://pm1.narvii.com/6366/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg",
-  }
+    quizPhoto: "http://pm1.narvii.com/6366/2c35594538206f7f598be792bf203b6b638e9c07_hq.jpg"
+  };
   client.user.setGame(`k!help | on ${client.guilds.size} guilds`);
   superagent
       .post(`https://bots.discord.pw/api/bots/${client.user.id}/stats`)
